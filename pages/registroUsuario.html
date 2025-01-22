@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--BOOSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Registrarse</title>
+</head>
+
+<body>
+
+    <!--Barra de navegacion-->
+    <!-- Section 1 -->
+    <section class="w- px-8 text-gray-700 bg-black">
+        <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
+            <div class="relative flex flex-col md:flex-row">
+                <a href="index.html"
+                    class="flex items-center mb-5 font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
+                    <img src="img/0001-logoNavbar.webp" alt="logoNav" width="150px" height="100px">
+                    <span class="mx-auto text-xl font-black leading-none text-white select-none"><span
+                            class="text-indigo-600"></span></span>
+                </a>
+            </div>
+
+            <div class="inline-flex items-center ml-5 space-x-6 lg:justify-end">
+                <a href="inicioSesion.html"
+                    class="text-base font-medium leading-6 text-white whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-400">
+                    Iniciar sesión
+                </a>
+                <a href="registroUsuario.html"
+                    class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+                    Registrarse
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Formulario para crear cuenta-->
+    <section class="container-fluid formulario-fondo" id="crearcuenta">
+        <p class="fs-1 text-center pt-3 text-white">Crear cuenta</p>
+        <div class="row mx-auto my-4 justify-content-center align-items-center d-flex flex-column flex-md-row">
+            <br>
+            <div class="col-lg-7 col-md-12 col-12 formulario-card fondo6 p-5 justify-content-center align-items-center">
+                <div style="flex-direction: column; align-items: center; text-align: center;">
+                    <img width="80px" height="80px" src="img/0001-logoNavbar.webp"
+                        alt="Logo de la Empresa">
+                </div>
+                <br>
+                <h2 class="text-center">Llene los siguientes espacios</h2>
+                <br>
+                <form action="/regUsuario" method="post">
+                    <!--USAR FORMO CONTROL PARA QUE SE ALINE Y LUZA PROFESIONA Y MB1-MARGEN PARA SEPARAR-->
+                    <label for="nombre">Ingrese su nombre:</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control mb-1" placeholder="Nombre"
+                        required>
+
+                    <label for="apellido">Ingrese su apellido:</label>
+                    <input type="text" name="apellido" id="apellido" class="form-control mb-1" placeholder="Apellido"
+                        required>
+
+                    <label for="usuario">Ingrese un nombre de usuario:</label>
+                    <input type="text" name="usuario" id="usuario" class="form-control mb-1" placeholder="Usuario"
+                        required>
+
+                    <label for="telefono">Ingrese su número de contacto:</label>
+                    <input type="text" name="telefono" id="telefono" class="form-control mb-1" placeholder="Teléfono"
+                        maxlength="10">
+
+                    <label for="email">Ingrese su correo electrónico:</label>
+                    <input type="email" name="email" id="email" class="form-control mb-1" placeholder="E-mail" required>
+
+                    <label for="contrasena">Ingrese una contraseña para la cuenta</label>
+                    <input type="password" name="contrasena" class="form-control mb-1" id="contrasena"
+                        placeholder="Contraseña" required>
+
+                    <label for="nacimiento">Ingrese su fecha de nacimiento:</label>
+                    <input type="date" name="nacimiento" id="nacimiento" class="form-control mb-1" required>
+
+                    <label for="rol">Seleccione si es maestro o estudiante</label>
+                    <select name="rol" id="rol" class="form-control mb-1">
+                        <option value="estudiante">Estudiante</option>
+                        <option value="docente">Docente</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-info mt-4 w-100 ">Registrarse</button>
+                </form>
+                <br>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Clear previous error messages
+            document.querySelectorAll('.text-red-500').forEach(function (element) {
+                element.classList.add('hidden');
+            });
+
+            let isValid = true;
+
+            // Validate username
+            const username = document.getElementById('usuario').value;
+            if (!username) {
+                document.getElementById('usernameError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Validate email
+            const email = document.getElementById('correoElectronico').value;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!email || !emailPattern.test(email)) {
+                document.getElementById('emailError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Validate password
+            const password = document.getElementById('contrasena').value;
+            if (!password) {
+                document.getElementById('passwordError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Validate confirm password
+            const confirmPassword = document.getElementById('confirm-password').value;
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            if (isValid) {
+            }
+        });
+    </script>
+    </div>
+
+
+
+</body>
+
+</html>

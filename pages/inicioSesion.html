@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black">
+
+    <!-- Barra de navegación -->
+    <section class="w-full px-8 text-gray-700 bg-black mb-0">
+        <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
+            <div class="relative flex flex-col md:flex-row">
+                <a href="index.html"
+                    class="flex items-center mb-5 font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
+                    <img src="img/0001-logoNavbar.webp" alt="logoNav" width="150px" height="100px">
+                    <span class="mx-auto text-xl font-black leading-none text-white select-none"><span
+                            class="text-indigo-600"></span></span>
+                </a>
+            </div>
+            <div class="inline-flex items-center ml-5 space-x-6 lg:justify-end">
+                <a href="inicioSesion.html"
+                    class="text-base font-medium leading-6 text-white whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-400">
+                    Iniciar sesión
+                </a>
+                <a href="registroUsuario.html"
+                    class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+                    Registrarse
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de inicio de sesión -->
+    <div class="flex min-h-screen w-full flex-wrap items-stretch bg-white dark:bg-gray-800 max-md:pb-20 max-md:pt-32">
+        <div class="grow md:flex md:w-1/2 md:flex-col md:items-center md:justify-center md:py-20">
+            <div class="w-full px-4 text-center text-xs lg:w-1/2">
+                <h1 class="mb-8 text-2xl font-bold text-gray-800 dark:text-white">Bienvenido de nuevo</h1>
+                <p class="mb-6 text-gray-600 dark:text-gray-400">Ingresa a tu cuenta</p>
+
+                <!-- FORMULARIO -->
+                <form method="post" action="/loginUsuario" class="flex flex-col gap-6" novalidate>
+                    <input type="hidden" id="plan" name="plan" value="">
+
+                    <!-- Campo Email -->
+                    <div class="relative">
+                        <label for="email"
+                            class="flex items-center gap-2 text-xs font-medium text-gray-700 dark:text-gray-200 mb-3">
+                            Ingresa tu correo electrónico
+                        </label>
+                        <input type="email" id="email" name="email" required
+                            class="block w-full px-4 py-3 border border-gray-300 bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 placeholder-gray-400 transition-colors focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-500"
+                            placeholder="Correo electrónico">
+                    </div>
+
+                    <!-- Campo Contraseña -->
+                    <div class="relative">
+                        <label for="contrasena"
+                            class="flex items-center gap-2 text-xs font-medium text-gray-700 dark:text-gray-200 mb-3">
+                            Ingresa tu contraseña
+                        </label>
+                        <div class="relative">
+                            <input type="password" id="contrasena" name="contrasena" required
+                                class="block w-full px-4 py-3 border border-gray-300 bg-gray-100 text-gray-800 placeholder-gray-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 placeholder-gray-400 transition-colors focus:border-indigo-500 focus:outline-none focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-500"
+                                placeholder="Contraseña">
+                            <button type="button"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-600"
+                                onclick="togglePasswordVisibility()">
+                                <svg id="showIcon" class="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    stroke="currentColor" fill="none">
+                                    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                    <path
+                                        d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Opciones adicionales -->
+                    <div class="flex justify-between gap-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember" name="remember"
+                                class="rounded border-gray-300 dark:border-gray-600 focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-500">
+                            <label for="remember"
+                                class="ml-2 text-xs text-gray-700 dark:text-gray-200">Recuérdame</label>
+                        </div>
+                        <a href="/forgot-password" class="text-indigo-600 dark:text-indigo-400">¿Olvidaste tu
+                            contraseña?</a>
+                    </div>
+
+                    <!-- Botón Enviar -->
+                    <button type="submit"
+                        class="px-5 py-3 font-medium text-white bg-indigo-600 rounded-full hover:bg-indigo-500 focus:ring focus:ring-indigo-300">
+                        Ingresar
+                    </button>
+
+                    <!-- Términos y privacidad -->
+                    <div class="text-gray-600 dark:text-gray-400">
+                        Al continuar, reconoces y aceptas nuestros
+                        <a href="/terms" class="font-medium text-indigo-600 underline">Términos y Condiciones</a> y
+                        <a href="/privacy-policy" class="font-medium text-indigo-600 underline">Política de
+                            Privacidad</a>.
+                    </div>
+                </form>
+
+                <!-- Enlace para registro -->
+                <div class="mt-20 text-gray-600 dark:text-gray-400">
+                    ¿Aún no tienes una cuenta? <a href="/register"
+                        class="font-medium text-indigo-600 underline">Regístrate</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Imagen lateral -->
+        <div class="hidden md:flex md:w-1/2 bg-cover bg-center p-3"
+            style="background-image: url('img/0004-fondoColor.jpg')">
+            <img src="img/0003-logoLogin.webp" alt="Service Dashboard Mockup"
+                class="rounded-[36px] shadow-[0_24px_88px_rgba(0,0,0,0.55)]">
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("contrasena");
+            const showIcon = document.getElementById("showIcon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                showIcon.style.display = "none";
+            } else {
+                passwordInput.type = "password";
+                showIcon.style.display = "block";
+            }
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>

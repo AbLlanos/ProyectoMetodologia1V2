@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Profesor</title>
+</head>
+
+<body>
+
+
+    <!-- Barra de navegación -->
+    <section class="w-full px-8 text-gray-700 bg-black mb-0">
+        <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
+            <div class="relative flex flex-col md:flex-row">
+                <a href="index.html"
+                    class="flex items-center mb-5 font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
+                    <img src="img/0001-logoNavbar.webp" alt="logoNav" width="150px" height="100px">
+                    <span class="mx-auto text-xl font-black leading-none text-white select-none"><span
+                            class="text-indigo-600"></span></span>
+                </a>
+            </div>
+            <div class="inline-flex items-center ml-5 space-x-6 lg:justify-end">
+                <a href="inicioSesion.html"
+                    class="text-base font-medium leading-6 text-white whitespace-no-wrap transition duration-150 ease-in-out hover:text-gray-400">
+                    Iniciar sesión
+                </a>
+                <a href="registroUsuario.html"
+                    class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+                    Registrarse
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabla de estudiante -->
+    <section id="tablaEstudiante" class="bg-gray-100 p-6 rounded-lg shadow-lg">
+        <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Prácticas Preprofesionales</h1>
+        <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Docente</h1>
+        <div class="h-1 bg-aqua mx-auto mt-3 rounded-full w-32"></div>
+        <p class="pt-3 text-center text-gray-600">Tus credenciales y horarios se mostrarán a continuación</p>
+
+        <div class="overflow-x-auto mt-6 text-center">
+            <table class="min-w-full text-sm text-left text-gray-500 border border-gray-300 rounded-lg">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">ID Práctica</th>
+                        <th scope="col" class="px-6 py-3">Nombre de la materia</th>
+                        <th scope="col" class="px-6 py-3">Fecha de inicio</th>
+                        <th scope="col" class="px-6 py-3">Fecha de fin</th>
+                        <th scope="col" class="px-6 py-3">Calificación</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-carro" class="bg-white divide-y divide-gray-200">
+                    <!-- Aquí se llenan dinámicamente los datos -->
+                </tbody>
+                <tfoot class="bg-gray-100 text-gray-700">
+                    <tr>
+                        <td class="px-6 py-3">
+                            <%= datos.idBase %>
+                        </td>
+                        <td class="px-6 py-3">
+                            <%= datos.nombreBase %>
+                        </td>
+                        <td class="px-6 py-3">
+                            <%= datos.apellidoBase %>
+                        </td>
+                        <td class="px-6 py-3">
+                            <%= datos.usuarioBase %>
+                        </td>
+                        <td class="px-6 py-3">
+                            <%= datos.telefonoBase %>
+                        </td>
+                        <td class="px-6 py-3">
+                            <%= datos.emailBase %>
+                        </td>
+
+                        <td>
+                            <form action="/eliminarEstudiante" method="POST">
+                                <input type="hidden" name="idEstudiante" value="<%= datos.idBase %>">
+                                <button type="submit"
+                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                    Eliminar
+                                </button>
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                </tfoot>
+            </table>
+        </div>
+    </section>
+
+
+
+
+</body>
+
+</html>
