@@ -1,35 +1,48 @@
-create database paginaElectrodomesticos;
+create database db_anteproyecto;
 
-use  paginaElectrodomesticos;
+use db_anteproyecto;
 
 create table usuarios (
-    idUsuario int auto_increment,
-    nombre varchar(50) not null,
-    apellido varchar(50) not null,
-    usuario varchar(50) not null unique,
-    telefono varchar(10),
-    email varchar(100) not null unique,
+    id_usuario int auto_increment,
+    nombre varchar(100) not null,
+    apellido varchar(100) not null,
+    cedula varchar(10) not null,
+	telefono varchar(10) not null,
+    correo_electronico varchar(150) unique not null,
     contrasena varchar(255) not null,
-    fecha_nacimiento date not null,
-	rol enum('estudiante','docente') not null,
-	fechaRegistro timestamp default current_timestamp,
-    constraint primary key (idUsuario)
+    rol enum('estudiante', 'docente') not null,
+	fecha_creacion timestamp default current_timestamp,
+	constraint primary key (id_usuario)
 );
-
 
 select * from usuarios;
 
-create table estudiantes (
-    id int auto_increment,
-    nombreMateria varchar(255),
-    fechaInicio date,
-    fechaFin date,
-    calificacion float,
-    constraint primary key (id)
+create table practicas_preprofesionales (
+    id_practica int auto_increment primary key,
+    nombre_estudiante int not null, 
+    cedula_estudiante varchar(10) not null,
+    id_docente int not null,    
+    empresa varchar(150) not null,
+    materia varchar(150) not null,
+    fecha_inicio date not null,
+    fecha_fin date not null,
+    calificacion decimal(5, 2),
+    estado enum('en_progreso', 'finalizada', 'cancelada') default 'en_progreso',
+    fecha_registro timestamp default current_timestamp
 );
 
-INSERT INTO estudiantes (nombreMateria, fechaInicio, fechaFin, calificacion) 
-VALUES ("artes", "2025-01-20", "2025-02-10", 4);
+select * from practicas_preprofesionales;
 
 
-select * from estudiantes;
+create table visitas_tecnicas (
+    id_visita int auto_increment primary key,
+    nombre_docente varchar(45) not null,
+    nombre_empresa varchar(45) not null,
+    descripcion text not null,
+    fecha_visita date not null,
+    observaciones text,
+    fecha_registro timestamp default current_timestamp
+);
+
+select * from visitas_tecnicas;
+
