@@ -8,6 +8,15 @@ import loginUsuario from "./rutas/loginUsuario.js";
 import indexRoutes from "./rutas/index.js"; // Importa las rutas aquí
 import eliminarRoutes from "./rutas/eliminarUsuario.js";
 
+import crearVisitas from "./rutas/crearVisitaTecnica.js";
+
+import crearPracticaPreprofesion from "./rutas/crearPractica.js";
+
+import admirarPractica from "./rutas/admirarPracticaPre.js";
+
+import admirarVisitaProfesor from "./rutas/admirarVisitaDocente.js";
+
+import admirarPracticaProfesor from "./rutas/admirarPracticasProfesor.js"
 
 
 const app = express();
@@ -32,6 +41,13 @@ app.use(express.static("pages"));
 app.use("/", usuarioRoutes);
 app.use("/", loginUsuario);
 app.use("/", eliminarRoutes);
+app.use("/", crearVisitas);
+app.use("/", crearPracticaPreprofesion);
+app.use("/", admirarPractica);
+app.use("/", admirarVisitaProfesor);
+app.use("/", admirarPracticaProfesor);
+
+
 
 // Configuración del puerto y arranque del servidor
 const PORT = 3001;

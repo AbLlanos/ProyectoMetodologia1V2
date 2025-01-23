@@ -6,18 +6,17 @@ const router = Router();
 router.post("/regUsuario", (req, res) => {
     const nombreBase = req.body.nombre;
     const apellidoBase = req.body.apellido;
-    const usuarioBase = req.body.usuario;
+    const cedulaBase = req.body.cedula;
     const telefonoBase = req.body.telefono;
     const emailBase = req.body.email;
     const contrasenaBase = req.body.contrasena;
-    const nacimientoBase = req.body.nacimiento;
     const rolUsuario = req.body.rol;
 
     //  const { nombre, apellido, usuario, telefono, email, contrasena, nacimiento } = req.body;
 
-    const insertar = `INSERT INTO usuarios(nombre, apellido, usuario, telefono, email, contrasena, fecha_nacimiento,rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const insertar = `INSERT INTO usuarios(nombre, apellido, cedula, telefono, correo_electronico, contrasena, rol) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    conexion.query(insertar, [nombreBase, apellidoBase, usuarioBase, telefonoBase, emailBase, contrasenaBase, nacimientoBase,rolUsuario], (error, result) => {
+    conexion.query(insertar, [nombreBase, apellidoBase, cedulaBase, telefonoBase, emailBase, contrasenaBase,rolUsuario], (error, result) => {
         if (error) {
             console.error("Error al registrar usuario:", error);
             res.redirect("errorRegistro.html");

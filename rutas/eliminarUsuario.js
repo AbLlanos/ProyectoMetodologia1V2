@@ -3,25 +3,21 @@ import conexion from "../config/conexion.js";
 
 const router = Router();
 
-router.post("/eliminarEstudiante", (req, res) => {
-    const idEstudiante = parseInt(req.body.idEstudiante);
+// Ruta para eliminar una práctica preprofesional
+router.post("/eliminarPractica", (req, res) => {
+    const idPractica = req.body.idPractica;
 
-    if (isNaN(idEstudiante)) {
-        res.status(400).send("ID inválido");
-        return;
-    }
+    const query = "DELETE FROM practicas_preprofesionales WHERE id_practica = ?";
 
-    const eliminar = `DELETE FROM estudiantes WHERE id = ?`;
-
-    conexion.query(eliminar, [idEstudiante], (error, result) => {
+    // Ejecutar la consulta de eliminación
+    conexion.query(query, [idPractica], (error, results) => {
         if (error) {
-            console.error("Error al eliminar estudiante:", error);
-            res.status(500).send("Error al eliminar estudiante");
+            console.error("Error al eliminar la práctica:", error);
+            res.status(500).json({ error: "Error al eliminar la práctica preprofesional" });
             return;
         }
-
-        console.log("Estudiante eliminado con éxito:", result);
-        res.redirect("/ventanaProfesor"); // Redirige a la vista del profesor
+        // Redirige después de eliminar o muestra un mensaje de éxito
+        res.redirect("/profesor"); // Suponiendo que esta es la ruta donde quieres volver
     });
 });
 

@@ -6,18 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--BOOSTRAP-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
     <title>Registrarse</title>
 </head>
 
-<body>
+<body style="background-image: url('/img/0005-fondoRegistro.jpg'); background-size: cover; background-position: center;">
 
     <!--Barra de navegacion-->
     <!-- Section 1 -->
@@ -45,107 +40,151 @@
         </div>
     </section>
 
-
     <!--Formulario para crear cuenta-->
-    <section class="container-fluid formulario-fondo" id="crearcuenta">
-        <p class="fs-1 text-center pt-3 text-white">Crear cuenta</p>
-        <div class="row mx-auto my-4 justify-content-center align-items-center d-flex flex-column flex-md-row">
-            <br>
-            <div class="col-lg-7 col-md-12 col-12 formulario-card fondo6 p-5 justify-content-center align-items-center">
-                <div style="flex-direction: column; align-items: center; text-align: center;">
-                    <img width="80px" height="80px" src="img/0001-logoNavbar.webp"
-                        alt="Logo de la Empresa">
+    <section class="container mx-auto py-2 px-4 " id="crearcuenta">
+        <div class="flex flex-col items-center justify-center">
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-4xl">
+                <div class="flex justify-center mb-6">
+                    <img width="120px" height="120px" src="img/0001-logoNavbar.webp" alt="Logo de la Empresa">
                 </div>
-                <br>
-                <h2 class="text-center">Llene los siguientes espacios</h2>
-                <br>
-                <form action="/regUsuario" method="post">
-                    <!--USAR FORMO CONTROL PARA QUE SE ALINE Y LUZA PROFESIONA Y MB1-MARGEN PARA SEPARAR-->
-                    <label for="nombre">Ingrese su nombre:</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control mb-1" placeholder="Nombre"
-                        required>
+                <h1 class="text-center text-white text-2xl mb-4">Crear cuenta</h1>
+                <hr>
+                <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
+                <!-- Formulario -->
+                <form id="registrationForm" action="/regUsuario" method="post">
+                    <!-- Campo Nombre -->
+                    <label for="nombre" class="block text-white mb-2">Ingrese su nombre:</label>
+                    <input type="text" name="nombre" id="nombre"
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Nombre" required>
+                    <p id="nombreError" class="text-red-500 text-sm hidden">El nombre es obligatorio.</p>
 
-                    <label for="apellido">Ingrese su apellido:</label>
-                    <input type="text" name="apellido" id="apellido" class="form-control mb-1" placeholder="Apellido"
-                        required>
+                    <!-- Campo Apellido -->
+                    <label for="apellido" class="block text-white mb-2">Ingrese su apellido:</label>
+                    <input type="text" name="apellido" id="apellido"
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Apellido" required>
+                    <p id="apellidoError" class="text-red-500 text-sm hidden">El apellido es obligatorio.</p>
 
-                    <label for="usuario">Ingrese un nombre de usuario:</label>
-                    <input type="text" name="usuario" id="usuario" class="form-control mb-1" placeholder="Usuario"
-                        required>
+                    <!-- Campo Cédula -->
+                    <label for="cedula" class="block text-white mb-2">Ingrese su cédula:</label>
+                    <input type="text" name="cedula" id="cedula"
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Cédula" required maxlength="10">
+                    <p id="cedulaError" class="text-red-500 text-sm hidden">La cédula es obligatoria.</p>
 
-                    <label for="telefono">Ingrese su número de contacto:</label>
-                    <input type="text" name="telefono" id="telefono" class="form-control mb-1" placeholder="Teléfono"
-                        maxlength="10">
+                    <!-- Campo Teléfono -->
+                    <label for="telefono" class="block text-white mb-2">Ingrese su número de contacto:</label>
+                    <input type="text" name="telefono" id="telefono"
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Teléfono" maxlength="10" required>
+                    <p id="telefonoError" class="text-red-500 text-sm hidden">El teléfono es obligatorio.</p>
 
-                    <label for="email">Ingrese su correo electrónico:</label>
-                    <input type="email" name="email" id="email" class="form-control mb-1" placeholder="E-mail" required>
+                    <!-- Campo Correo -->
+                    <label for="email" class="block text-white mb-2">Ingrese su correo electrónico:</label>
+                    <input type="email" name="email" id="email"
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="E-mail" required>
+                    <p id="emailError" class="text-red-500 text-sm hidden">Ingrese un correo válido.</p>
 
-                    <label for="contrasena">Ingrese una contraseña para la cuenta</label>
-                    <input type="password" name="contrasena" class="form-control mb-1" id="contrasena"
-                        placeholder="Contraseña" required>
+                    <!-- Campo Contraseña -->
+                    <label for="contrasena" class="block text-white mb-2">Ingrese una contraseña para la cuenta:</label>
+                    <input type="password" name="contrasena"  id="contrasena" 
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       placeholder="Contraseña" required>
+                    <p id="passwordError" class="text-red-500 text-sm hidden">La contraseña es obligatoria.</p>
 
-                    <label for="nacimiento">Ingrese su fecha de nacimiento:</label>
-                    <input type="date" name="nacimiento" id="nacimiento" class="form-control mb-1" required>
+                    <!-- Campo Verificar Contraseña -->
+                    <label for="confirmarContrasena" class="block text-white mb-2">Verifique la contraseña:</label>
+                    <input type="password" name="confirmarContrasena" id="confirmarContrasena"
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Verificar contraseña" required>
+                    <p id="confirmPasswordError" class="text-red-500 text-sm hidden">Las contraseñas no coinciden.</p>
 
-                    <label for="rol">Seleccione si es maestro o estudiante</label>
-                    <select name="rol" id="rol" class="form-control mb-1">
+                    <!-- Campo Rol -->
+                    <label for="rol" class="block text-white mb-2">Seleccione si es maestro o estudiante:</label>
+                    <select name="rol" id="rol"
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="estudiante">Estudiante</option>
                         <option value="docente">Docente</option>
                     </select>
 
-                    <button type="submit" class="btn btn-info mt-4 w-100 ">Registrarse</button>
+                    <!-- Botón de Enviar -->
+                    <button type="submit"
+                        class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Registrarse</button>
                 </form>
-                <br>
             </div>
         </div>
     </section>
-
 
     <script>
         document.getElementById('registrationForm').addEventListener('submit', function (event) {
             event.preventDefault();
 
-            // Clear previous error messages
+            // Limpiar los errores anteriores
             document.querySelectorAll('.text-red-500').forEach(function (element) {
                 element.classList.add('hidden');
             });
 
             let isValid = true;
 
-            // Validate username
-            const username = document.getElementById('usuario').value;
-            if (!username) {
-                document.getElementById('usernameError').classList.remove('hidden');
+            // Validar nombre
+            const nombre = document.getElementById('nombre').value;
+            if (!nombre) {
+                document.getElementById('nombreError').classList.remove('hidden');
                 isValid = false;
             }
 
-            // Validate email
-            const email = document.getElementById('correoElectronico').value;
+            // Validar apellido
+            const apellido = document.getElementById('apellido').value;
+            if (!apellido) {
+                document.getElementById('apellidoError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Validar cédula
+            const cedula = document.getElementById('cedula').value;
+            if (!cedula) {
+                document.getElementById('cedulaError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Validar teléfono
+            const telefono = document.getElementById('telefono').value;
+            if (!telefono) {
+                document.getElementById('telefonoError').classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Validar correo
+            const email = document.getElementById('email').value;
             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!email || !emailPattern.test(email)) {
                 document.getElementById('emailError').classList.remove('hidden');
                 isValid = false;
             }
 
-            // Validate password
-            const password = document.getElementById('contrasena').value;
-            if (!password) {
+            // Validar contraseña
+            const contrasena = document.getElementById('contrasena').value;
+            if (!contrasena) {
                 document.getElementById('passwordError').classList.remove('hidden');
                 isValid = false;
             }
 
-            // Validate confirm password
-            const confirmPassword = document.getElementById('confirm-password').value;
-            if (password !== confirmPassword) {
+            // Validar verificar contraseña
+            const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+            if (contrasena !== confirmarContrasena) {
                 document.getElementById('confirmPasswordError').classList.remove('hidden');
                 isValid = false;
             }
 
+            // Si todo es válido, se puede enviar el formulario
             if (isValid) {
+                this.submit();
             }
         });
     </script>
-    </div>
+
 
 
 

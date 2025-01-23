@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Estudiante</title>
 </head>
@@ -38,19 +37,39 @@
     <!-- Tabla de estudiante -->
     <section id="tablaEstudiante" class="bg-gray-100 p-6 rounded-lg shadow-lg">
         <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Prácticas Preprofesionales</h1>
+        <hr>
         <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Estudiante</h1>
         <div class="h-1 bg-aqua mx-auto mt-3 rounded-full w-32"></div>
         <p class="pt-3 text-center text-gray-600">Tus credenciales y horarios se mostrarán a continuación</p>
+
+        <h2>ID: <%= datos.idBase %></h2>
+        <h2>Nombre: <%= datos.nombreBase %></h2>
+        <h2>Apellido:  <%= datos.apellidoBase %></h2>
+        <h2>Cédula: <%= datos.cedulaBase%></h2>
+        <h2>Telefono: <%= datos.telefonoBase %></h2>
+        <h2>Rol:<%= datos.rolBase %></h2>
+
+        <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Horarios y rendimiento</h1>
+
+        <!-- Botón para cargar prácticas -->
+        <div class="text-center mt-6">
+            <button id="cargarPracticasBtn" class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
+                Cargar Prácticas
+            </button>
+        </div>
 
         <div class="overflow-x-auto mt-6 text-center">
             <table class="min-w-full text-sm text-left text-gray-500 border border-gray-300 rounded-lg">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">ID Práctica</th>
-                        <th scope="col" class="px-6 py-3">Nombre de la materia</th>
+                        <th scope="col" class="px-6 py-3">Docente</th>
+                        <th scope="col" class="px-6 py-3">Empresa</th>
+                        <th scope="col" class="px-6 py-3">Carrera</th>
                         <th scope="col" class="px-6 py-3">Fecha de inicio</th>
                         <th scope="col" class="px-6 py-3">Fecha de fin</th>
                         <th scope="col" class="px-6 py-3">Calificación</th>
+                        <th scope="col" class="px-6 py-3">Estado</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-carro" class="bg-white divide-y divide-gray-200">
@@ -59,7 +78,7 @@
                 <tfoot class="bg-gray-100 text-gray-700">
                     <tr>
                         <td class="px-6 py-3">
-                            <%= datos.nombreBase %>
+                            <%= datos.idBase %>
                         </td>
                         <td class="px-6 py-3">
                             <%= datos.apellidoBase %>
@@ -79,9 +98,42 @@
         </div>
     </section>
 
+    
 
+    <!-- Script para cargar las prácticas -->
+    <script>
+    document.getElementById("cargarPracticasBtn").addEventListener("click", function() {
+        const idEstudiante = "<%= datos.idBase %>";  // Obtener el ID del estudiante de la variable en el backend
 
+        fetch(`/practicas/${idEstudiante}`)
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById("tbody-carro");
+                tbody.innerHTML = '';  // Limpiar las filas actuales
+
+                data.forEach(practica => {
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td class="px-6 py-3">${practica.id_practica}</td>
+                        <td class="px-6 py-3">${practica.docente}</td>
+                        <td class="px-6 py-3">${practica.empresa}</td>
+                        <td class="px-6 py-3">${practica.materia}</td>
+                        <td class="px-6 py-3">${practica.fecha_inicio}</td>
+                        <td class="px-6 py-3">${practica.fecha_fin}</td>
+                        <td class="px-6 py-3">${practica.calificacion}</td>
+                        <td class="px-6 py-3">${practica.estado}</td>
+                    `;
+
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error("Error al cargar las prácticas:", error);
+                alert("Hubo un error al cargar las prácticas.");
+            });
+    });
+    </script>
 
 </body>
-
 </html>
