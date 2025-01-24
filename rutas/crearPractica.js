@@ -6,8 +6,7 @@ const router = Router();
 router.post("/crearPracticaPreprofesional", (req, res) => {
     const {
         idDocente,
-        idEstudiante,
-        cedulaEstudiante,
+        cedulaEstudiante, // Solo recibimos la cédula
         nombreEmpresa,
         materia,
         fechaInicio,
@@ -16,40 +15,56 @@ router.post("/crearPracticaPreprofesional", (req, res) => {
         estado
     } = req.body;
 
-    // Consulta para insertar los datos en la tabla `practicas_preprofesionales`
-    const insertarPractica = `
-        INSERT INTO practicas_preprofesionales (
-            nombre_estudiante, 
-            cedula_estudiante, 
-            id_docente, 
-            empresa, 
-            materia, 
-            fecha_inicio, 
-            fecha_fin, 
-            calificacion, 
-            estado
-        ) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
+    // Consulta para verificar si el estudiante con la cédula existe
+    const verificarEstudiante = `SELECT id_usuario, nombre, apellido FROM usuarios WHERE cedula = ? AND rol = 'estudiante'`;
 
-    conexion.query(insertarPractica, [
-        idEstudiante,       // ID del estudiante
-        cedulaEstudiante,   // Cédula del estudiante
-        idDocente,          // ID del docente
-        nombreEmpresa,            // Nombre de la empresa
-        materia,            // Materia
-        fechaInicio,        // Fecha de inicio
-        fechaFin,           // Fecha de fin
-        calificacion,       // Calificación
-        estado              // Estado de la práctica
-    ], (error, result) => {
+    conexion.query(verificarEstudiante, [cedulaEstudiante], (error, result) => {
         if (error) {
-            console.error("Error al registrar la práctica preprofesional:", error);
-            res.redirect("/errorRegistro.html");
-            return;
+            console.error("Error al verificar el estudiante:", error);
+            return res.redirect("/errorRegistro.html");
         }
-        console.log("Práctica preprofesional creada exitosamente:", result);
-        res.redirect("/paginaExito.html"); // Redirigir a una página de éxito si se registra correctamente
+
+        if (result.length === 0) {
+            // Si no se encuentra el estudiante
+            return res.status(404).send("Estudiante no encontrado");
+        }
+
+        const idEstudiante = result[0].id_usuario; // Tomamos el id del estudiante encontrado
+
+        // Inserción de la práctica preprofesional
+        const insertarPractica = `
+            INSERT INTO practicas_preprofesionales (
+                nombre_estudiante, 
+                cedula_estudiante, 
+                id_docente, 
+                empresa, 
+                materia, 
+                fecha_inicio, 
+                fecha_fin, 
+                calificacion, 
+                estado
+            ) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        conexion.query(insertarPractica, [
+            idEstudiante,        // ID del estudiante
+            cedulaEstudiante,    // Cédula del estudiante
+            idDocente,           // ID del docente
+            nombreEmpresa,       // Nombre de la empresa
+            materia,             // Materia
+            fechaInicio,         // Fecha de inicio
+            fechaFin,            // Fecha de fin
+            calificacion,        // Calificación
+            estado               // Estado de la práctica
+        ], (error, result) => {
+            if (error) {
+                console.error("Error al registrar la práctica preprofesional:", error);
+                res.redirect("/errorRegistro.html");
+                return;
+            }
+            console.log("Práctica preprofesional creada exitosamente:", result);
+        });
     });
 });
 

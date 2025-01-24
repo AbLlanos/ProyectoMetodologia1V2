@@ -18,6 +18,10 @@ import admirarVisitaProfesor from "./rutas/admirarVisitaDocente.js";
 
 import admirarPracticaProfesor from "./rutas/admirarPracticasProfesor.js"
 
+import modificarPractica from "./rutas/modificarPracticaProfesor.js"
+
+import recuperarDatosPractica from "./rutas/recuperarDatosPracticasProfesor.js"
+
 
 const app = express();
 
@@ -46,6 +50,8 @@ app.use("/", crearPracticaPreprofesion);
 app.use("/", admirarPractica);
 app.use("/", admirarVisitaProfesor);
 app.use("/", admirarPracticaProfesor);
+app.use("/", modificarPractica);
+app.use("/", recuperarDatosPractica);
 
 
 
