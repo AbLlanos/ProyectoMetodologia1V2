@@ -21,7 +21,7 @@ router.get("/visitas/:nombre_docente", (req, res) => {
     conexion.query(query, [nombreDocente], (error, results) => {
         if (error) {
             console.error("Error al obtener las visitas técnicas:", error);
-            res.status(500).json({ error: "Error al obtener las visitas técnicas" });
+            res.redirect("/errorGeneral.html");
             return;
         }
         res.json(results);  // Enviamos los resultados al frontend

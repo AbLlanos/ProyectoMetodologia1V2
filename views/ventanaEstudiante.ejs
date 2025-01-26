@@ -35,30 +35,88 @@
     </section>
 
     <!-- Tabla de estudiante -->
+    <!-- Tabla de estudiante -->
     <section id="tablaEstudiante" class="bg-gray-100 p-6 rounded-lg shadow-lg">
-        <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Prácticas Preprofesionales</h1>
-        <hr>
-        <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Estudiante</h1>
-        <div class="h-1 bg-aqua mx-auto mt-3 rounded-full w-32"></div>
-        <p class="pt-3 text-center text-gray-600">Tus credenciales y horarios se mostrarán a continuación</p>
+        <h1 class="text-center text-2xl font-bold text-gray-800">Prácticas Preprofesionales</h1>
+        <h2 class="text-center text-xl font-semibold text-gray-700 mt-2">Estudiante</h2>
+        <div class="h-1 bg-teal-500 mx-auto mt-3 rounded-full w-32"></div>
+        <p class="text-center text-gray-600 mt-3">
+            Tus credenciales y horarios se mostrarán a continuación:
+        </p>
 
-        <h2>ID: <%= datos.idBase %></h2>
-        <h2>Nombre: <%= datos.nombreBase %></h2>
-        <h2>Apellido:  <%= datos.apellidoBase %></h2>
-        <h2>Cédula: <%= datos.cedulaBase%></h2>
-        <h2>Telefono: <%= datos.telefonoBase %></h2>
-        <h2>Rol:<%= datos.rolBase %></h2>
-
-        <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Horarios y rendimiento</h1>
-
-        <!-- Botón para cargar prácticas -->
-        <div class="text-center mt-6">
-            <button id="cargarPracticasBtn" class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
-                Cargar Prácticas
-            </button>
+        <!-- Tabla para mostrar los datos -->
+        <div class="overflow-x-auto mt-6">
+            <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                <thead>
+                    <tr>
+                        <th
+                            class="px-6 py-3 text-left font-bold uppercase tracking-wider border-b border-gray-300 bg-blue-500 text-white">
+                            Campo
+                        </th>
+                        <th
+                            class="px-6 py-3 text-left font-bold uppercase tracking-wider border-b border-gray-300 bg-blue-600 text-white">
+                            Credenciales
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-6 py-3 font-semibold text-gray-700">ID</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.idBase %>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Nombre</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.nombreBase %>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Apellido</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.apellidoBase %>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Cédula</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.cedulaBase %>
+                        </td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Teléfono</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.telefonoBase %>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Rol</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.rolBase %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </section>
 
-        <div class="overflow-x-auto mt-6 text-center">
+
+    <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Horarios y rendimiento</h1>
+
+    <!-- Botón para cargar prácticas -->
+    <div class="text-center mt-6">
+        <button id="cargarPracticasBtn"
+            class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
+            Cargar Prácticas
+        </button>
+    </div>
+
+
+    <!--TABLA PRACTICAS-->
+    <!--TABLA PRACTICAS-->
+    <section class="p-6 bg-gray-100 rounded-lg shadow-lg">
+        <div class="overflow-x-auto mt-6">
             <table class="min-w-full text-sm text-left text-gray-500 border border-gray-300 rounded-lg">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -75,65 +133,56 @@
                 <tbody id="tbody-carro" class="bg-white divide-y divide-gray-200">
                     <!-- Aquí se llenan dinámicamente los datos -->
                 </tbody>
-                <tfoot class="bg-gray-100 text-gray-700">
-                    <tr>
-                        <td class="px-6 py-3">
-                            <%= datos.idBase %>
-                        </td>
-                        <td class="px-6 py-3">
-                            <%= datos.apellidoBase %>
-                        </td>
-                        <td class="px-6 py-3">
-                            <%= datos.usuarioBase %>
-                        </td>
-                        <td class="px-6 py-3">
-                            <%= datos.telefonoBase %>
-                        </td>
-                        <td class="px-6 py-3">
-                            <%= datos.emailBase %>
-                        </td>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </section>
 
-    
-
     <!-- Script para cargar las prácticas -->
     <script>
-    document.getElementById("cargarPracticasBtn").addEventListener("click", function() {
-        const idEstudiante = "<%= datos.idBase %>";  // Obtener el ID del estudiante de la variable en el backend
+        document.getElementById("cargarPracticasBtn").addEventListener("click", function () {
+            const idEstudiante = "<%= datos.idBase %>";  // Obtener el ID del estudiante desde el backend
 
-        fetch(`/practicas/${idEstudiante}`)
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById("tbody-carro");
-                tbody.innerHTML = '';  // Limpiar las filas actuales
+            fetch(`/practicas/${idEstudiante}`)
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById("tbody-carro");
+                    tbody.innerHTML = '';  // Limpiar las filas actuales
 
-                data.forEach(practica => {
-                    const row = document.createElement("tr");
+                    if (data.length === 0) {
+                        // Si no se encontraron prácticas, mostrar mensaje en la tabla
+                        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-gray-500 py-3">No se encontraron prácticas.</td></tr>';
+                    } else {
+                        data.forEach(practica => {
+                            const row = document.createElement("tr");
 
-                    row.innerHTML = `
-                        <td class="px-6 py-3">${practica.id_practica}</td>
-                        <td class="px-6 py-3">${practica.docente}</td>
-                        <td class="px-6 py-3">${practica.empresa}</td>
-                        <td class="px-6 py-3">${practica.materia}</td>
-                        <td class="px-6 py-3">${practica.fecha_inicio}</td>
-                        <td class="px-6 py-3">${practica.fecha_fin}</td>
-                        <td class="px-6 py-3">${practica.calificacion}</td>
-                        <td class="px-6 py-3">${practica.estado}</td>
+                            // Concatenar el nombre y apellido del docente
+                            const docenteCompleto = `${practica.nombre_docente} ${practica.apellido_docente}`;
+
+                            row.innerHTML = `
+                    <td class="px-6 py-3">${practica.id_practica}</td>
+                    <td class="px-6 py-3">${docenteCompleto}</td>  <!-- Mostrar nombre y apellido del docente -->
+                    <td class="px-6 py-3">${practica.empresa}</td>
+                    <td class="px-6 py-3">${practica.materia}</td>
+                    <td class="px-6 py-3">${practica.fecha_inicio}</td>
+                    <td class="px-6 py-3">${practica.fecha_fin}</td>
+                    <td class="px-6 py-3">${practica.calificacion}</td>
+                    <td class="px-6 py-3">${practica.estado}</td>
                     `;
 
-                    tbody.appendChild(row);
+                            tbody.appendChild(row);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al cargar las prácticas:", error);
+                    alert("Hubo un error al cargar las prácticas.");
                 });
-            })
-            .catch(error => {
-                console.error("Error al cargar las prácticas:", error);
-                alert("Hubo un error al cargar las prácticas.");
-            });
-    });
+        });
+
     </script>
 
+
+
 </body>
+
 </html>

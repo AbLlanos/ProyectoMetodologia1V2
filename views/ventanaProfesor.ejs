@@ -37,253 +37,297 @@
     </section>
 
     <!-- Tabla de profesor-->
-    <section id="tablaEstudiante" class="bg-gray-100 p-6 rounded-lg shadow-lg">
-        <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Prácticas Preprofesionales</h1>
-        <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Docente</h1>
-        <div class="h-1 bg-aqua mx-auto mt-3 rounded-full w-32"></div>
-        <p class="pt-3 text-center text-gray-600">Tus credenciales y horarios se mostrarán a continuación</p>
+    <section id=" container tablaEstudiante" class="bg-gray-100 p-6 rounded-lg shadow-lg">
+        <h1 class="text-center text-2xl font-bold text-gray-800">ITSQMET</h1>
+        <h2 class="text-center text-xl font-semibold text-gray-700 mt-2">Docente</h2>
+        <div class="h-1 bg-teal-500 mx-auto mt-3 rounded-full w-32"></div>
+        <p class="text-center text-gray-600 mt-3">
+            Tus credenciales y opciones de gestión se mostrarán a continuación:
+        </p>
 
-        <h2>ID: <%= datos.idBase %>
-        </h2>
-        <h2>Nombre: <%= datos.nombreBase %>
-        </h2>
-        <h2>Apellido: <%= datos.apellidoBase %>
-        </h2>
-        <h2>Cédula: <%= datos.cedulaBase%>
-        </h2>
-        <h2>Telefono: <%= datos.telefonoBase %>
-        </h2>
-        <h2>Rol:<%= datos.rolBase %>
-        </h2>
-
-
-        <!-- Botón para cargar las prácticas -->
-        <div class="text-center mt-6">
-            <button id="cargarPracticasBtn"
-                class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
-                Cargar Prácticas Preprofesionales
-            </button>
-        </div>
-
-        <!--tabla DE PRACTICAS-->
-        <div class="overflow-x-auto mt-6 text-center">
-            <table class="min-w-full text-sm text-left text-gray-500 border border-gray-300 rounded-lg">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+        <!-- Tabla para mostrar los datos -->
+        <div class="overflow-x-auto mt-6">
+            <table class="min-w-full bg-white border border-gray-200 rounded-lg table">
+                <thead>
                     <tr>
-                        <th scope="col" class="px-6 py-3">ID Práctica</th>
-                        <th scope="col" class="px-6 py-3">Nombre estudiante</th>
-                        <th scope="col" class="px-6 py-3">Cédula Estudiante</th>
-                        <th scope="col" class="px-6 py-3">Empresa</th>
-                        <th scope="col" class="px-6 py-3">Carrera</th>
-                        <th scope="col" class="px-6 py-3">Fecha inicio</th>
-                        <th scope="col" class="px-6 py-3">Fecha fin</th>
-                        <th scope="col" class="px-6 py-3">Calificacion</th>
-                        <th scope="col" class="px-6 py-3">Estado</th>
-                        <th scope="col" class="px-6 py-3"></th>
+                        <th
+                            class="px-6 py-3 text-left font-bold uppercase tracking-wider border-b border-gray-300 bg-blue-500">
+                            Campo
+                        </th>
+                        <th
+                            class="px-6 py-3 text-left font-bold uppercase tracking-wider border-b border-gray-300 bg-blue-600">
+                            Credenciales
+                        </th>
                     </tr>
                 </thead>
-                <tbody id="tbody-carro" class="bg-white divide-y divide-gray-200">
-                    <!-- Aquí se llenan dinámicamente los datos -->
-                </tbody>
-                <tfoot class="bg-gray-100 text-gray-700">
-                    <tr>
-                        <td class="px-6 py-3">
+                <tbody>
+                    <tr class="border-b">
+                        <td class="px-6 py-3 font-semibold text-gray-700">ID</td>
+                        <td class="px-6 py-3 text-gray-600">
                             <%= datos.idBase %>
                         </td>
-                        <td class="px-6 py-3">
+                    </tr>
+                    <tr class="border-b">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Nombre</td>
+                        <td class="px-6 py-3 text-gray-600">
                             <%= datos.nombreBase %>
                         </td>
-                        <td class="px-6 py-3">
+                    </tr>
+                    <tr class="border-b">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Apellido</td>
+                        <td class="px-6 py-3 text-gray-600">
                             <%= datos.apellidoBase %>
                         </td>
-                        <td class="px-6 py-3">
-                            <%= datos.usuarioBase %>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Cédula</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.cedulaBase %>
                         </td>
-                        <td class="px-6 py-3">
+                    </tr>
+                    <tr class="border-b">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Teléfono</td>
+                        <td class="px-6 py-3 text-gray-600">
                             <%= datos.telefonoBase %>
                         </td>
-                        <td class="px-6 py-3">
-                            <%= datos.emailBase %>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 font-semibold text-gray-700">Rol</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.rolBase %>
                         </td>
-                        <td class="px-6 py-3">
-                            <%= datos.idBase %>
-                        </td>
-                        <td class="px-6 py-3">
-                            <%= datos.idBase %>
-                        </td>
-                        <td class="px-6 py-3">
-                            <%= datos.idBase %>
-                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-                        <td>
-                            <form action="/eliminarEstudiante" method="POST">
-                                <input type="hidden" name="idEstudiante" value="<%= datos.idBase %>">
-                                <button type="submit"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+
+
+    <!-- Botón para cargar las prácticas -->
+
+
+    <!--tabla DE PRACTICAS-->
+    <!-- Tabla de prácticas -->
+    <section id="tablaPracticas" class="bg-gray-100 p-6 rounded-lg shadow-lg">
+        <h1 class="text-center text-2xl font-bold text-gray-800">Prácticas Preprofesionales</h1>
+        <div class="h-1 bg-teal-500 mx-auto mt-3 rounded-full w-32"></div>
+        <p class="text-center text-gray-600 mt-3">
+            A continuación se detallan las prácticas preprofesionales asignadas:
+        </p>
+        <section>
+            <div class="text-center mt-6">
+                <button id="cargarPracticasBtn"
+                    class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
+                    Cargar Prácticas Preprofesionales
+                </button>
+            </div>
+
+            <!-- Contenedor con desbordamiento horizontal -->
+            <div class="overflow-x-auto mt-6 p-5">
+                <table class="min-w-full text-sm text-left text-gray-500 border border-gray-300 rounded-lg">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">ID Práctica</th>
+                            <th scope="col" class="px-6 py-3">Nombre estudiante</th>
+                            <th scope="col" class="px-6 py-3">Cédula Estudiante</th>
+                            <th scope="col" class="px-6 py-3">Empresa</th>
+                            <th scope="col" class="px-6 py-3">Carrera</th>
+                            <th scope="col" class="px-6 py-3">Fecha inicio</th>
+                            <th scope="col" class="px-6 py-3">Fecha fin</th>
+                            <th scope="col" class="px-6 py-3">Calificación</th>
+                            <th scope="col" class="px-6 py-3">Estado</th>
+                            <th scope="col" class="px-6 py-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-carro" class="bg-white divide-y divide-gray-200">
+                        <!-- Aquí se llenan dinámicamente los datos -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <script>
+            // Script para cargar las prácticas en la tabla
+            document.getElementById("cargarPracticasBtn").addEventListener("click", function () {
+                const idDocente = "<%= datos.idBase %>"; // Obtener el ID del docente desde el backend
+
+                // Verifica que el ID del docente es correcto
+                console.log("Docente ID: ", idDocente);
+
+                // Realiza una solicitud para obtener las prácticas preprofesionales
+                fetch(`/practicasPreprofesionales/${idDocente}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const tbody = document.getElementById("tbody-carro");
+                        tbody.innerHTML = ''; // Limpiar las filas actuales de la tabla
+
+                        // Verificar si no hay prácticas
+                        if (data.length === 0) {
+                            tbody.innerHTML = '<tr><td colspan="10" class="text-center text-gray-500 py-3">No se encontraron prácticas preprofesionales.</td></tr>';
+                        } else {
+                            // Si hay prácticas, crear las filas en la tabla
+                            data.forEach(practica => {
+                                const row = document.createElement("tr");
+
+                                row.innerHTML = `
+                        <td class="px-6 py-3">${practica.id_practica}</td>
+                        <td class="px-6 py-3">${practica.nombre_estudiante}</td>
+                        <td class="px-6 py-3">${practica.cedula_estudiante}</td>
+                        <td class="px-6 py-3">${practica.empresa}</td>
+                        <td class="px-6 py-3">${practica.materia}</td>
+                        <td class="px-6 py-3">${practica.fecha_inicio}</td>
+                        <td class="px-6 py-3">${practica.fecha_fin}</td>
+                        <td class="px-6 py-3">${practica.calificacion}</td>
+                        <td class="px-6 py-3">${practica.estado}</td>
+                        <td class="px-6 py-3">
+                            <form action="/eliminarPractica" method="POST">
+                                <input type="hidden" name="idPractica" value="${practica.id_practica}">
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                     Eliminar
                                 </button>
                             </form>
-
                         </td>
+                        <td class="px-6 py-3">
+                            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded editarBtn" data-id="${practica.id_practica}">
+                                Editar
+                            </button>
+                        </td>
+                    `;
 
-                    </tr>
+                                tbody.appendChild(row);
+                            });
 
-                </tfoot>
-            </table>
-        </div>
-    </section>
+                            // Agregar el evento para cada botón de editar
+                            const botonesEditar = document.querySelectorAll('.editarBtn');
+                            botonesEditar.forEach(boton => {
+                                boton.addEventListener('click', function () {
+                                    const idPractica = boton.getAttribute('data-id');
+                                    cargarDatosPractica(idPractica);
+                                });
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error al cargar las prácticas:", error);
+                        alert("Hubo un error al cargar las prácticas preprofesionales.");
+                    });
+            });
 
-    <script>
-        // Espera a que el documento esté completamente cargado
-        document.getElementById("cargarPracticasBtn").addEventListener("click", function () {
-            const idDocente = "<%= datos.idBase %>";  // Obtener el ID del docente desde el backend
-
-            // Verifica que el ID del docente es correcto
-            console.log("Docente ID: ", idDocente);
-
-            // Realiza una solicitud para obtener las prácticas preprofesionales
-            fetch(`/practicasPreprofesionales/${idDocente}`)
-                .then(response => response.json())
-                .then(data => {
-                    const tbody = document.getElementById("tbody-carro");
-                    tbody.innerHTML = '';  // Limpiar las filas actuales de la tabla
-
-                    // Verificar si no hay prácticas
-                    if (data.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="10" class="text-center text-gray-500">No se encontraron prácticas preprofesionales.</td></tr>';
-                    } else {
-                        // Si hay prácticas, crear las filas en la tabla
-                        data.forEach(practica => {
-                            const row = document.createElement("tr");
-
-                            row.innerHTML = `
-                                <td class="px-6 py-3">${practica.id_practica}</td>
-                                <td class="px-6 py-3">${practica.nombre_estudiante}</td>
-                                <td class="px-6 py-3">${practica.cedula_estudiante}</td>
-                                <td class="px-6 py-3">${practica.empresa}</td>
-                                <td class="px-6 py-3">${practica.materia}</td>
-                                <td class="px-6 py-3">${practica.fecha_inicio}</td>
-                                <td class="px-6 py-3">${practica.fecha_fin}</td>
-                                <td class="px-6 py-3">${practica.calificacion}</td>
-                                <td class="px-6 py-3">${practica.estado}</td>
-                                <td class="px-6 py-3">
-                                    <form action="/eliminarPractica" method="POST">
-                                        <input type="hidden" name="idPractica" value="${practica.id_practica}">
-                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                            Eliminar
-                                        </button>
-                                    </form>
-                                </td>
-                            `;
-
-                            tbody.appendChild(row);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error("Error al cargar las prácticas:", error);
-                    alert("Hubo un error al cargar las prácticas preprofesionales.");
-                });
-        });
-    </script>
+        </script>
 
 
-    <!--FORMULARIO PARA CREAR PRACTICA PREPROFESIONALES-->
-    <section class="container mx-auto py-2 px-4" id="crearcuenta">
-        <div class="flex flex-col items-center justify-center">
-            <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-4xl">
-                <div class="flex justify-center mb-6">
-                    <img width="120px" height="120px" src="img/0001-logoNavbar.webp" alt="Logo de la Empresa">
+
+
+        <!--FORMULARIO PARA CREAR PRACTICA PREPROFESIONALES-->
+        <section class="container mx-auto py-2 px-4 p-5" id="crearcuenta">
+            <div class="flex flex-col items-center justify-center">
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-4xl">
+                    <div class="flex justify-center mb-6">
+                        <img width="120px" height="120px" src="img/0001-logoNavbar.webp" alt="Logo de la Empresa">
+                    </div>
+                    <h1 class="text-center text-white text-2xl mb-4">Generar la práctica pre-profesional</h1>
+                    <hr>
+                    <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
+
+                    <form id="visitaForm" action="/crearPracticaPreprofesional" method="post">
+                        <div class="grid grid-cols-2 gap-4">
+
+                            <!-- Campo Docente -->
+                            <div>
+                                <label for="id_docente" class="block text-white mb-2">Docente</label>
+                                <input type="text" name="idDocente" id="idDocente"
+                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Nombre del docente" required readonly value="<%= datos.idBase %>">
+                                <input type="text" name="nombreDocente" id="nombreDocente"
+                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Nombre del docente" required readonly
+                                    value="<%= datos.nombreBase %> <%= datos.apellidoBase %> ">
+                            </div>
+
+                            <!-- Campo Estudiante (Cédula y Nombre) -->
+                            <div>
+                                <label for="id_estudiante" class="block text-white mb-2">Estudiante</label>
+                                <input type="text" name="idEstudiante" id="idEstudiante"
+                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Nombre del estudiante" required>
+                                <input type="text" name="cedulaEstudiante" id="cedulaEstudiante"
+                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Cédula del estudiante" required maxlength="10">
+                            </div>
+
+                        </div>
+
+                        <!-- Campo Empresa -->
+                        <div>
+                            <label for="nombreEmpresa" class="block text-white mb-2">Escribir el nombre de la
+                                empresa:</label>
+                            <input type="text" name="nombreEmpresa" id="nombreEmpresa"
+                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required placeholder="Empresa">
+                        </div>
+
+                        <!-- Campo Carrera -->
+                        <div>
+                            <label for="materia" class="block text-white mb-2">Carrera</label>
+                            <input type="text" name="materia" id="materia"
+                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Carrera del estudiante" required>
+                        </div>
+
+                        <!-- Campo Fechas -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="fecha_inicio" class="block text-white mb-2">Fecha de inicio</label>
+                                <input type="date" name="fechaInicio" id="fechaInicio"
+                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                            </div>
+
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="fecha_fin" class="block text-white mb-2">Fecha de fin</label>
+                                <input type="date" name="fechaFin" id="fechaFin"
+                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                            </div>
+                        </div>
+
+
+                        <!-- Campo Calificación -->
+                        <div>
+                            <label for="calificacion" class="block text-white mb-2">Calificación</label>
+                            <input type="number" name="calificacion" id="calificacion" min="0" max="10" step="0.1"
+                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Calificación de la práctica" required>
+                        </div>
+
+                        <!-- Campo Estado -->
+                        <div>
+                            <label for="estado" class="block text-white mb-2">Estado de la práctica</label>
+                            <select name="estado" id="estado"
+                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required>
+                                <option value="en_progreso">En progreso</option>
+                                <option value="finalizada">Finalizada</option>
+                                <option value="cancelada">Cancelada</option>
+                            </select>
+                        </div>
+
+                        <!-- Botón de Enviar -->
+                        <button type="submit"
+                            class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Registrar
+                            Visita</button>
+                    </form>
                 </div>
-                <h1 class="text-center text-white text-2xl mb-4">Generar la visita técnica</h1>
-                <hr>
-                <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
-
-                <form id="visitaForm" action="/crearPracticaPreprofesional" method="post">
-                    <div class="grid grid-cols-2 gap-4">
-
-                        <!-- Campo Docente -->
-                        <div>
-                            <label for="id_docente" class="block text-white mb-2">Docente</label>
-                            <input type="text" name="idDocente" id="idDocente"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Nombre del docente" required readonly value="<%= datos.nombreBase %>">
-                        </div>
-
-                        <!-- Campo Estudiante (Cédula y Nombre) -->
-                        <div>
-                            <label for="id_estudiante" class="block text-white mb-2">Estudiante</label>
-                            <input type="text" name="idEstudiante" id="idEstudiante"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Nombre del estudiante" required>
-                            <input type="text" name="cedulaEstudiante" id="cedulaEstudiante"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Cédula del estudiante" required maxlength="10">
-                        </div>
-
-                    </div>
-
-                    <!-- Campo Empresa -->
-                    <div>
-                        <label for="nombreEmpresa" class="block text-white mb-2">Escribir el nombre de la
-                            empresa:</label>
-                        <input type="text" name="nombreEmpresa" id="nombreEmpresa"
-                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required placeholder="Empresa">
-                    </div>
-
-                    <!-- Campo Carrera -->
-                    <div>
-                        <label for="materia" class="block text-white mb-2">Carrera</label>
-                        <input type="text" name="materia" id="materia"
-                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Carrera del estudiante" required>
-                    </div>
-
-                    <!-- Campo Fechas -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label for="fecha_inicio" class="block text-white mb-2">Fecha de inicio</label>
-                            <input type="date" name="fechaInicio" id="fechaInicio"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                required>
-                        </div>
-                        <div>
-                            <label for="fecha_fin" class="block text-white mb-2">Fecha de fin</label>
-                            <input type="date" name="fechaFin" id="fechaFin"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                required>
-                        </div>
-                    </div>
-
-                    <!-- Campo Calificación -->
-                    <div>
-                        <label for="calificacion" class="block text-white mb-2">Calificación</label>
-                        <input type="number" name="calificacion" id="calificacion" min="0" max="10" step="0.1"
-                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Calificación de la práctica" required>
-                    </div>
-
-                    <!-- Campo Estado -->
-                    <div>
-                        <label for="estado" class="block text-white mb-2">Estado de la práctica</label>
-                        <select name="estado" id="estado"
-                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required>
-                            <option value="en_progreso">En progreso</option>
-                            <option value="finalizada">Finalizada</option>
-                            <option value="cancelada">Cancelada</option>
-                        </select>
-                    </div>
-
-                    <!-- Botón de Enviar -->
-                    <button type="submit"
-                        class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Registrar
-                        Visita</button>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+
+
+
+        <!--FORMULARIO PARA MODIFICAR PARAVCTICO PREPREFSIONAL-->
 
 
 
@@ -292,61 +336,70 @@
 
 
 
-    <!-- Tabla de Visitas Técnicas -->
-    <section id="tablaVisitas" class="bg-gray-100 p-6 rounded-lg shadow-lg">
-        <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Visitas Técnicas del Docente</h1>
-        <div class="h-1 bg-aqua mx-auto mt-3 rounded-full w-32"></div>
-        <!--BOTON PARA CARGAR-->
-        <div class="text-center mt-6">
-            <button id="cargarVisitasBtn"
-                class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
-                Cargar Prácticas
-            </button>
-        </div>
 
 
-        <div class="overflow-x-auto mt-6 text-center">
-            <table class="min-w-full text-sm text-left text-gray-500 border border-gray-300 rounded-lg">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">ID Visita</th>
-                        <th scope="col" class="px-6 py-3">Empresa</th>
-                        <th scope="col" class="px-6 py-3">Descripción</th>
-                        <th scope="col" class="px-6 py-3">Fecha de Visita</th>
-                        <th scope="col" class="px-6 py-3">Observaciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-visitas" class="bg-white divide-y divide-gray-200">
-                    <!-- Aquí se llenan dinámicamente los datos -->
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <script>
 
 
-        // Cambié el ID a 'cargarVisitasBtn' para que coincida con el HTML
-        document.getElementById("cargarVisitasBtn").addEventListener("click", function () {
-            const nombreDocente = "<%= datos.nombreBase %>";  // Obtener el nombre del docente desde el backend
 
-            // Verifica si el nombreDocente es correcto
-            console.log("Docente: ", nombreDocente);
+        <!-- Tabla de Visitas Técnicas -->
+        <section id="tablaVisitas" class="bg-gray-100 p-6 rounded-lg shadow-lg p-5">
+            <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Visitas Técnicas del Docente</h1>
+            <div class="h-1 bg-teal-500 mx-auto mt-3 rounded-full w-32"></div>
+            <p class="text-center text-gray-600 mt-3">
+                A continuación podras observar tus visitas técnicas planificadas:
+            </p>
+            <div class="h-1 bg-aqua mx-auto mt-3 rounded-full w-32"></div>
+            <!--BOTON PARA CARGAR-->
+            <div class="text-center mt-6">
+                <button id="cargarVisitasBtn"
+                    class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
+                    Cargar Prácticas
+                </button>
+            </div>
 
-            fetch(`/visitas/${nombreDocente}`)
-                .then(response => response.json())
-                .then(data => {
-                    const tbody = document.getElementById("tbody-visitas");
-                    tbody.innerHTML = '';  // Limpiar las filas actuales
 
-                    // Si no hay datos, muestra un mensaje
-                    if (data.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500">No se encontraron visitas.</td></tr>';
-                    } else {
-                        data.forEach(visita => {
-                            const row = document.createElement("tr");
+            <div class="overflow-x-auto mt-6 text-center">
+                <table class="min-w-full text-sm text-left text-gray-500 border border-gray-300 rounded-lg">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">ID Visita</th>
+                            <th scope="col" class="px-6 py-3">Empresa</th>
+                            <th scope="col" class="px-6 py-3">Descripción</th>
+                            <th scope="col" class="px-6 py-3">Fecha de Visita</th>
+                            <th scope="col" class="px-6 py-3">Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-visitas" class="bg-white divide-y divide-gray-200">
+                        <!-- Aquí se llenan dinámicamente los datos -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-                            row.innerHTML = `
+        <script>
+
+
+            // Cambié el ID a 'cargarVisitasBtn' para que coincida con el HTML
+            document.getElementById("cargarVisitasBtn").addEventListener("click", function () {
+                const nombreDocente = "<%= datos.nombreBase %>";  // Obtener el nombre del docente desde el backend
+
+                // Verifica si el nombreDocente es correcto
+                console.log("Docente: ", nombreDocente);
+
+                fetch(`/visitas/${nombreDocente}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const tbody = document.getElementById("tbody-visitas");
+                        tbody.innerHTML = '';  // Limpiar las filas actuales
+
+                        // Si no hay datos, muestra un mensaje
+                        if (data.length === 0) {
+                            tbody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500">No se encontraron visitas.</td></tr>';
+                        } else {
+                            data.forEach(visita => {
+                                const row = document.createElement("tr");
+
+                                row.innerHTML = `
                                 <td class="px-6 py-3">${visita.id_visita}</td>
                                 <td class="px-6 py-3">${visita.nombre_empresa}</td>
                                 <td class="px-6 py-3">${visita.descripcion}</td>
@@ -354,105 +407,101 @@
                                 <td class="px-6 py-3">${visita.observaciones}</td>
                             `;
 
-                            tbody.appendChild(row);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error("Error al cargar las visitas:", error);
-                    alert("Hubo un error al cargar las visitas.");
-                });
-        });
-    </script>
-
-
-
-
-
-    <!--Seccion crear visitar-->
-    <section class="container mx-auto py-2 px-4 " id="crearcuenta">
-        <div class="flex flex-col items-center justify-center">
-            <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-4xl">
-                <div class="flex justify-center mb-6">
-                    <img width="120px" height="120px" src="img/0001-logoNavbar.webp" alt="Logo de la Empresa">
-                </div>
-                <h1 class="text-center text-white text-2xl mb-4">Generar la visita técnica</h1>
-                <hr>
-                <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
-
-                <form id="visitaForm" action="/crearVisitaTecnica" method="post">
-                    <div class="grid grid-cols-2 gap-4">
-
-                        <!-- Campo Docente -->
-                        <div>
-                            <label for="nombre_docente" class="block text-white mb-2">Su nombre</label>
-                            <input type="text" name="nombreDocente" id="nombreDocente"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Nombre del docente" required readonly value="<%= datos.nombreBase %>">
-                        </div>
-
-                        <!-- Campo Empresa -->
-                        <div>
-                            <label for="nombre_empresa" class="block text-white mb-2">Seleccionar empresa:</label>
-                            <select name="nombreEmpresa" id="nombreEmpresa"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                required>
-                                <option value="Tecnología eInnovación S.A.">Tecnología eInnovación S.A.</option>
-                                <option value="Servicios Profesionales R&C">Servicios Profesionales R&C</option>
-                                <option value="Productos Naturales Ecuador">Productos Naturales Ecuador</option>
-                                <option value="Consultoría Empresarial JMG">Consultoría Empresarial JMG</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Campo Descripción -->
-                    <label for="descripcion" class="block text-white mb-2">Descripción de la visita:</label>
-                    <textarea name="descripcion" id="descripcion" rows="2"
-                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Detalles de la visita" required></textarea>
-
-                    <!-- Campo Fecha de Visita -->
-                    <label for="fecha_visita" class="block text-white mb-2">Fecha de la visita:</label>
-                    <input type="date" name="fechaVisita" id="fechaVisita"
-                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required>
-
-                    <!-- Campo Observaciones -->
-                    <label for="observaciones" class="block text-white mb-2">Observaciones:</label>
-                    <textarea name="observaciones" id="observaciones" rows="2"
-                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Observaciones adicionales (opcional)"></textarea>
-
-                    <!-- Botón de Enviar -->
-                    <button type="submit"
-                        class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Registrar
-                        Visita</button>
-                </form>
-
-
-                <!-- Script para mostrar y ocultar el formulario -->
-                <script>
-                    document.getElementById("toggleFormButton").addEventListener("click", function () {
-                        var formContainer = document.getElementById("visitaFormContainer");
-                        formContainer.classList.toggle("hidden");
+                                tbody.appendChild(row);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error al cargar las visitas:", error);
+                        alert("Hubo un error al cargar las visitas.");
                     });
-                </script>
+            });
+        </script>
 
-                <!-- Estilos adicionales -->
-                <style>
-                    /* Estilo para las columnas del formulario */
-                    .grid {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 16px;
-                    }
 
-                    /* Asegurarse de que los inputs y select estén alineados */
-                    .grid input,
-                    .grid select {
-                        width: 100%;
-                    }
-                </style>
+
+
+
+        <!--Seccion crear visitar-->
+        <section class="container mx-auto py-2 px-4 " id="crearcuenta p-5">
+            <div class="flex flex-col items-center justify-center">
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-4xl">
+                    <div class="flex justify-center mb-6">
+                        <img width="120px" height="120px" src="img/0001-logoNavbar.webp" alt="Logo de la Empresa">
+                    </div>
+                    <h1 class="text-center text-white text-2xl mb-4">Generar la visita técnica</h1>
+                    <hr>
+                    <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
+
+                    <form id="visitaForm" action="/crearVisitaTecnica" method="post">
+                        <div class="grid grid-cols-2 gap-4">
+
+                            <!-- Campo Docente -->
+                            <div>
+                                <label for="nombre_docente" class="block text-white mb-2">Su nombre</label>
+                                <input type="text" name="nombreDocente" id="nombreDocente"
+                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Nombre del docente" required readonly value="<%= datos.nombreBase %>">
+                            </div>
+
+                            <!-- Campo Empresa -->
+                            <div>
+                                <label for="nombre_docente" class="block text-white mb-2">Su nombre</label>
+                                <input type="text" name="nombreEmpresa" id="nombreEmpresa"
+                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Empresa">
+
+                            </div>
+                        </div>
+
+                        <!-- Campo Descripción -->
+                        <label for="descripcion" class="block text-white mb-2">Descripción de la visita:</label>
+                        <textarea name="descripcion" id="descripcion" rows="2"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Detalles de la visita" required></textarea>
+
+                        <!-- Campo Fecha de Visita -->
+                        <label for="fecha_visita" class="block text-white mb-2">Fecha de la visita:</label>
+                        <input type="date" name="fechaVisita" id="fechaVisita"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+
+                        <!-- Campo Observaciones -->
+                        <label for="observaciones" class="block text-white mb-2">Observaciones:</label>
+                        <textarea name="observaciones" id="observaciones" rows="2"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Observaciones adicionales (opcional)"></textarea>
+
+                        <!-- Botón de Enviar -->
+                        <button type="submit"
+                            class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Registrar
+                            Visita</button>
+                    </form>
+
+
+                    <!-- Script para mostrar y ocultar el formulario -->
+                    <script>
+                        document.getElementById("toggleFormButton").addEventListener("click", function () {
+                            var formContainer = document.getElementById("visitaFormContainer");
+                            formContainer.classList.toggle("hidden");
+                        });
+                    </script>
+
+                    <!-- Estilos adicionales -->
+                    <style>
+                        /* Estilo para las columnas del formulario */
+                        .grid {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 16px;
+                        }
+
+                        /* Asegurarse de que los inputs y select estén alineados */
+                        .grid input,
+                        .grid select {
+                            width: 100%;
+                        }
+                    </style>
 
 
 

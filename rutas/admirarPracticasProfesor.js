@@ -28,7 +28,7 @@ router.get("/practicasPreprofesionales/:id_docente", (req, res) => {
     conexion.query(query, [idDocente], (error, results) => {
         if (error) {
             console.error("Error al obtener las prácticas:", error);
-            res.status(500).json({ error: "Error al obtener las prácticas preprofesionales" });
+            res.redirect("/errorGeneral.html");
             return;
         }
 

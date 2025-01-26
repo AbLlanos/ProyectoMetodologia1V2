@@ -15,4 +15,6 @@ conexion.connect((error) => {
     console.log("Conexión exitosa a la base de datos.");
 });
 
+
+
 export default conexion;

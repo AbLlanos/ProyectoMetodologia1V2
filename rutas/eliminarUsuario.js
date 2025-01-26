@@ -13,11 +13,11 @@ router.post("/eliminarPractica", (req, res) => {
     conexion.query(query, [idPractica], (error, results) => {
         if (error) {
             console.error("Error al eliminar la práctica:", error);
-            res.status(500).json({ error: "Error al eliminar la práctica preprofesional" });
+            res.redirect("/errorGeneral.html");
             return;
         }
         // Redirige después de eliminar o muestra un mensaje de éxito
-        res.redirect("/profesor"); // Suponiendo que esta es la ruta donde quieres volver
+        res.redirect("/tareaRealizada.html"); // Suponiendo que esta es la ruta donde quieres volver
     });
 });
 

@@ -38,7 +38,7 @@
     <div class="flex min-h-screen w-full flex-wrap items-stretch bg-white dark:bg-gray-800 max-md:pb-20 max-md:pt-32">
         <div class="grow md:flex md:w-1/2 md:flex-col md:items-center md:justify-center md:py-20">
             <div class="w-full px-4 text-center text-xs lg:w-1/2">
-                <h1 class="mb-8 text-2xl font-bold text-gray-800 dark:text-white">Bienvenido de nuevo</h1>
+                <h1 class="mb-8 text-xl font-bold text-gray-800 dark:text-white">Bienvenido de nuevo</h1>
                 <p class="mb-6 text-gray-600 dark:text-gray-400">Ingresa a tu cuenta</p>
 
                 <!-- FORMULARIO -->
@@ -109,7 +109,7 @@
 
                 <!-- Enlace para registro -->
                 <div class="mt-20 text-gray-600 dark:text-gray-400">
-                    ¿Aún no tienes una cuenta? <a href="/register"
+                    ¿Aún no tienes una cuenta? <a href="registroUsuario.html"
                         class="font-medium text-indigo-600 underline">Regístrate</a>
                 </div>
             </div>
@@ -123,17 +123,20 @@
         </div>
     </div>
 
+    <!-- Script para el toggle de visibilidad de la contraseña -->
     <script>
+        // Función para alternar la visibilidad de la contraseña
         function togglePasswordVisibility() {
-            const passwordInput = document.getElementById("contrasena");
-            const showIcon = document.getElementById("showIcon");
+            const passwordField = document.getElementById('contrasena');
+            const showIcon = document.getElementById('showIcon');
 
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                showIcon.style.display = "none";
+            // Alternar tipo de campo de contraseña entre 'password' y 'text'
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                showIcon.setAttribute('d', 'M12 10c-2 0 -3.6 2 -3.6 4s1.6 4 3.6 4c1.6 0 3.6 -2 3.6 -4s-1.6 -4 -3.6 -4');
             } else {
-                passwordInput.type = "password";
-                showIcon.style.display = "block";
+                passwordField.type = 'password';
+                showIcon.setAttribute('d', 'M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0');
             }
         }
     </script>

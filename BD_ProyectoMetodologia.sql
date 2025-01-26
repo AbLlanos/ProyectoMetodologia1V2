@@ -6,7 +6,7 @@ create table usuarios (
     id_usuario int auto_increment,
     nombre varchar(100) not null,
     apellido varchar(100) not null,
-    cedula varchar(10) not null,
+    cedula varchar(10) not null unique,
 	telefono varchar(10) not null,
     correo_electronico varchar(150) unique not null,
     contrasena varchar(255) not null,
@@ -19,9 +19,10 @@ select * from usuarios;
 
 create table practicas_preprofesionales (
     id_practica int auto_increment primary key,
-    nombre_estudiante int not null, 
+    nombre_estudiante varchar(45) not null, 
     cedula_estudiante varchar(10) not null,
-    id_docente int not null,    
+    id_docente int not null,
+    nombre_docente varchar(45) not null,
     empresa varchar(150) not null,
     materia varchar(150) not null,
     fecha_inicio date not null,
@@ -45,4 +46,8 @@ create table visitas_tecnicas (
 );
 
 select * from visitas_tecnicas;
+
+
+
+
 

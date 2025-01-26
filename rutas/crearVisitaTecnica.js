@@ -14,11 +14,11 @@ router.post("/crearVisitaTecnica", (req, res) => {
     conexion.query(insertarVisita, [nombreDocente, nombreEmpresa, descripcion, fechaVisita, observaciones], (error, result) => {
         if (error) {
             console.error("Error al registrar visita técnica:", error);
-            res.redirect("/errorRegistro.html");
+            res.redirect("errorGeneral.html");
             return;
         }
         console.log("Visita técnica creada exitosamente:", result);
-        res.redirect("/ventanaProfesor");  // O redirigir a donde desees
+        res.redirect("/tareaRealizada.html");  // O redirigir a donde desees
     });
 });
 

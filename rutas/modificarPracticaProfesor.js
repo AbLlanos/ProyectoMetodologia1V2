@@ -5,25 +5,24 @@ import link from "../config/link.js";
 
 const router = Router();
 
-router.get("/modificarPracticaFormulario", (req, res) => {
-    const { idPractica } = req.query;
+router.get("/practica/:id", (req, res) => {
+    const idPractica = req.params.id;
 
-    const query = `SELECT * FROM practicas WHERE id = ?`;
-    conexion.query(query, [idPractica], (err, rows) => {
-        if (err) {
-            console.error("Error al obtener los datos de la práctica:", err);
-            return res.status(500).send("Error al obtener los datos de la práctica.");
+    const query = "SELECT * FROM practicas_preprofesionales WHERE id_practica = ?";
+
+    conexion.query(query, [idPractica], (error, results) => {
+        if (error) {
+            console.error("Error al obtener los datos de la práctica:", error);
+            res.status(500).json({ error: "Error al obtener los datos de la práctica." });
+            return;
         }
 
-        if (rows.length === 0) {
-            return res.status(404).send("No se encontró la práctica.");
+        if (results.length > 0) {
+            res.json(results[0]);
+        } else {
+            res.status(404).json({ error: "Práctica no encontrada" });
         }
-
-        const practica = rows[0];
-        res.render("modificarPractica", { practica });
     });
 });
-
-
 
 export default router;

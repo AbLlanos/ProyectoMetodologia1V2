@@ -6,7 +6,8 @@ const router = Router();
 router.post("/crearPracticaPreprofesional", (req, res) => {
     const {
         idDocente,
-        cedulaEstudiante, // Solo recibimos la cédula
+        nombreDocente,
+        cedulaEstudiante,
         nombreEmpresa,
         materia,
         fechaInicio,
@@ -21,12 +22,17 @@ router.post("/crearPracticaPreprofesional", (req, res) => {
     conexion.query(verificarEstudiante, [cedulaEstudiante], (error, result) => {
         if (error) {
             console.error("Error al verificar el estudiante:", error);
-            return res.redirect("/errorRegistro.html");
+            console.log("No existe");
+            res.redirect("errorGeneral.html");
+            return
         }
 
         if (result.length === 0) {
             // Si no se encuentra el estudiante
-            return res.status(404).send("Estudiante no encontrado");
+            console.log("No existe1");
+            res.redirect("errorGeneral.html");
+            return
+
         }
 
         const idEstudiante = result[0].id_usuario; // Tomamos el id del estudiante encontrado
@@ -37,6 +43,7 @@ router.post("/crearPracticaPreprofesional", (req, res) => {
                 nombre_estudiante, 
                 cedula_estudiante, 
                 id_docente, 
+                nombre_docente,
                 empresa, 
                 materia, 
                 fecha_inicio, 
@@ -44,13 +51,14 @@ router.post("/crearPracticaPreprofesional", (req, res) => {
                 calificacion, 
                 estado
             ) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         conexion.query(insertarPractica, [
             idEstudiante,        // ID del estudiante
             cedulaEstudiante,    // Cédula del estudiante
-            idDocente,           // ID del docente
+            idDocente, 
+            nombreDocente,          // ID del docente
             nombreEmpresa,       // Nombre de la empresa
             materia,             // Materia
             fechaInicio,         // Fecha de inicio
@@ -60,10 +68,12 @@ router.post("/crearPracticaPreprofesional", (req, res) => {
         ], (error, result) => {
             if (error) {
                 console.error("Error al registrar la práctica preprofesional:", error);
-                res.redirect("/errorRegistro.html");
+                console.log("No existe2");
+                res.redirect("/errorGeneral.html");
                 return;
             }
-            console.log("Práctica preprofesional creada exitosamente:", result);
+            console.error("Error al registrar la práctica preprofesional:", error);
+            res.redirect("/tareaRealizada.html");
         });
     });
 });
