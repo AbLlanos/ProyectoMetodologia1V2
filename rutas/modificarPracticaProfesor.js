@@ -5,24 +5,22 @@ import link from "../config/link.js";
 
 const router = Router();
 
-router.get("/practica/:id", (req, res) => {
+// En tu archivo de rutas de Express (por ejemplo, routes.js)
+router.post('/actualizarPracticaPreprofesional/:id', (req, res) => {
     const idPractica = req.params.id;
+    const { idEstudiante, cedulaEstudiante, nombreEmpresa, materia, fechaInicio, fechaFin, calificacion, estado } = req.body;
 
-    const query = "SELECT * FROM practicas_preprofesionales WHERE id_practica = ?";
-
-    conexion.query(query, [idPractica], (error, results) => {
-        if (error) {
-            console.error("Error al obtener los datos de la práctica:", error);
-            res.status(500).json({ error: "Error al obtener los datos de la práctica." });
-            return;
-        }
-
-        if (results.length > 0) {
-            res.json(results[0]);
+    // Aquí agregas la lógica para actualizar la práctica en la base de datos
+    // Ejemplo:
+    conexion.query('UPDATE  practicas_preprofesionales SET nombre_estudiante = ?, cedula_estudiante = ?, empresa = ?, materia = ?, fecha_inicio = ?, fecha_fin = ?, calificacion = ?, estado = ? WHERE id_practica = ?', [idEstudiante, cedulaEstudiante, nombreEmpresa, materia, fechaInicio, fechaFin, calificacion, estado, idPractica], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.redirect('errorRegistro.html')
         } else {
-            res.status(404).json({ error: "Práctica no encontrada" });
+            res.redirect('/index.html'); // O la ruta que quieras después de actualizar
         }
     });
 });
+
 
 export default router;

@@ -230,7 +230,8 @@
                     <hr>
                     <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
 
-                    <form id="visitaForm" action="/crearPracticaPreprofesional" method="post">
+                    <form id="visitaForm" action="/crearPracticaPreprofesional" method="post" id="modificarForm"
+                        action="" method="POST">
                         <div class="grid grid-cols-2 gap-4">
 
                             <!-- Campo Docente -->
@@ -317,17 +318,51 @@
                         </div>
 
                         <!-- Botón de Enviar -->
+                        <!-- Solo el botón de actualización -->
                         <button type="submit"
-                            class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Registrar
-                            Visita</button>
+                            class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            id="actualizarBtn">Generar o actualizar práctica</button>
+
                     </form>
                 </div>
             </div>
         </section>
 
+        <script>
+            function cargarDatosPractica(idPractica) {
+                fetch(`/practica/${idPractica}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert("No se pudo cargar la práctica.");
+                            return;
+                        }
+                        // Cargar los datos de la práctica en el formulario
+                        document.getElementById('idEstudiante').value = data.nombre_estudiante;
+                        document.getElementById('cedulaEstudiante').value = data.cedula_estudiante;
+                        document.getElementById('nombreEmpresa').value = data.empresa;
+                        document.getElementById('materia').value = data.materia;
+                        document.getElementById('fechaInicio').value = data.fecha_inicio;
+                        document.getElementById('fechaFin').value = data.fecha_fin;
+                        document.getElementById('calificacion').value = data.calificacion;
+                        document.getElementById('estado').value = data.estado;
+
+                        // Cambiar la acción del formulario para la actualización de la práctica
+                        const form = document.getElementById('visitaForm');
+                        form.setAttribute('action', `/actualizarPracticaPreprofesional/${idPractica}`); // Actualiza la acción
+
+                        // Cambiar el texto del botón para "Actualizar"
+                        document.getElementById('actualizarBtn').textContent = 'Actualizar Práctica';
+                    })
+                    .catch(error => {
+                        console.error("Error al cargar los datos de la práctica:", error);
+                        alert("Hubo un error al cargar los datos de la práctica.");
+                    });
+            }
 
 
-        <!--FORMULARIO PARA MODIFICAR PARAVCTICO PREPREFSIONAL-->
+        </script>
+
 
 
 
