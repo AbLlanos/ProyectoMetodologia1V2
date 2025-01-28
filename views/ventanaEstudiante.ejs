@@ -77,6 +77,12 @@
                         <td class="px-6 py-3 text-gray-600">
                             <%= datos.apellidoBase %>
                         </td>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Usuario</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.usuarioBase %>
+                        </td>
+                    </tr>
                     </tr>
                     <tr class="border-b hover:bg-gray-50">
                         <td class="px-6 py-3 font-semibold text-gray-700">Cédula</td>
@@ -84,6 +90,7 @@
                             <%= datos.cedulaBase %>
                         </td>
                     </tr>
+
                     <tr class="border-b hover:bg-gray-50">
                         <td class="px-6 py-3 font-semibold text-gray-700">Teléfono</td>
                         <td class="px-6 py-3 text-gray-600">
@@ -103,6 +110,7 @@
 
 
     <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Horarios y rendimiento</h1>
+    <div class="h-1 bg-teal-500 mx-auto mt-3 rounded-full w-32"></div>
 
     <!-- Botón para cargar prácticas -->
     <div class="text-center mt-6">
@@ -112,20 +120,20 @@
         </button>
     </div>
 
-
-    <!--TABLA PRACTICAS-->
-    <!--TABLA PRACTICAS-->
-    <section class="p-6 bg-gray-100 rounded-lg shadow-lg">
+    <!-- TABLA PRACTICAS -->
+    <section class="p-6 bg-gray-100 rounded-lg shadow-lg mx-6">
         <div class="overflow-x-auto mt-6">
             <table class="min-w-full text-sm text-left text-gray-500 border border-gray-300 rounded-lg">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3">ID Práctica</th>
-                        <th scope="col" class="px-6 py-3">Docente</th>
-                        <th scope="col" class="px-6 py-3">Empresa</th>
-                        <th scope="col" class="px-6 py-3">Carrera</th>
-                        <th scope="col" class="px-6 py-3">Fecha de inicio</th>
-                        <th scope="col" class="px-6 py-3">Fecha de fin</th>
+                        <th scope="col" class="px-6 py-3">ID Registro</th>
+                        <th scope="col" class="px-6 py-3">Unidad de vinculación</th>
+                        <th scope="col" class="px-6 py-3">Entidad Beneficiaria</th>
+                        <th scope="col" class="px-6 py-3">Ubicacion inicial</th>
+                        <th scope="col" class="px-6 py-3">Ubicacion final</th>
+                        <th scope="col" class="px-6 py-3">Hora Inicio</th>
+                        <th scope="col" class="px-6 py-3">Hora Fin</th>
+                        <th scope="col" class="px-6 py-3">Hora Total Visita</th>
                         <th scope="col" class="px-6 py-3">Calificación</th>
                         <th scope="col" class="px-6 py-3">Estado</th>
                     </tr>
@@ -136,38 +144,56 @@
             </table>
         </div>
     </section>
+    
 
     <!-- Script para cargar las prácticas -->
     <script>
+        // Script para cargar las prácticas en la tabla
         document.getElementById("cargarPracticasBtn").addEventListener("click", function () {
-            const idEstudiante = "<%= datos.idBase %>";  // Obtener el ID del estudiante desde el backend
+            const idDocente = "<%= datos.idBase %>"; // Obtener el ID del docente desde el backend
 
-            fetch(`/practicas/${idEstudiante}`)
+            // Verifica que el ID del docente es correcto
+            console.log("Docente ID: ", idDocente);
+
+            // Realiza una solicitud para obtener las prácticas preprofesionales
+            fetch(`/practicas/${idDocente}`)
                 .then(response => response.json())
                 .then(data => {
                     const tbody = document.getElementById("tbody-carro");
-                    tbody.innerHTML = '';  // Limpiar las filas actuales
+                    tbody.innerHTML = ''; // Limpiar las filas actuales de la tabla
 
+                    // Función para formatear fechas y horas
+                    const formatFechaHora = (isoString) => {
+                        const fecha = new Date(isoString);
+                        return new Intl.DateTimeFormat("es-ES", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        }).format(fecha);
+                    };
+
+                    // Verificar si no hay prácticas
                     if (data.length === 0) {
-                        // Si no se encontraron prácticas, mostrar mensaje en la tabla
-                        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-gray-500 py-3">No se encontraron prácticas.</td></tr>';
+                        tbody.innerHTML = '<tr><td colspan="12" class="text-center text-gray-500 py-3">No se encontraron prácticas preprofesionales.</td></tr>';
                     } else {
+                        // Si hay prácticas, crear las filas en la tabla
                         data.forEach(practica => {
                             const row = document.createElement("tr");
 
-                            // Concatenar el nombre y apellido del docente
-                            const docenteCompleto = `${practica.nombre_docente} ${practica.apellido_docente}`;
-
                             row.innerHTML = `
-                    <td class="px-6 py-3">${practica.id_practica}</td>
-                    <td class="px-6 py-3">${docenteCompleto}</td>  <!-- Mostrar nombre y apellido del docente -->
-                    <td class="px-6 py-3">${practica.empresa}</td>
-                    <td class="px-6 py-3">${practica.materia}</td>
-                    <td class="px-6 py-3">${practica.fecha_inicio}</td>
-                    <td class="px-6 py-3">${practica.fecha_fin}</td>
-                    <td class="px-6 py-3">${practica.calificacion}</td>
-                    <td class="px-6 py-3">${practica.estado}</td>
-                    `;
+                                <td class="px-6 py-3">${practica.id_registro}</td>
+                                <td class="px-6 py-3">${practica.nombre_unidadvinculacion}</td> <!-- Nombre de la unidad -->
+                                <td class="px-6 py-3">${practica.entidad_beneficiaria}</td>
+                                <td class="px-6 py-3">${practica.ubicacion_inicio}</td> <!-- Ubicación de inicio -->
+                                <td class="px-6 py-3">${practica.ubicacion_final}</td> <!-- Ubicación de final -->
+                                <td class="px-6 py-3">${formatFechaHora(practica.hora_inicio)}</td> <!-- Hora de inicio -->
+                                <td class="px-6 py-3">${formatFechaHora(practica.hora_final)}</td> <!-- Hora de finalización -->
+                                <td class="px-6 py-3">${practica.hora_total_visita}</td>
+                                <td class="px-6 py-3">${practica.calificacion}</td>
+                                <td class="px-6 py-3">${practica.estado}</td>
+                            `;
 
                             tbody.appendChild(row);
                         });
@@ -175,11 +201,11 @@
                 })
                 .catch(error => {
                     console.error("Error al cargar las prácticas:", error);
-                    alert("Hubo un error al cargar las prácticas.");
+                    alert("Hubo un error al cargar las prácticas preprofesionales.");
                 });
         });
-
     </script>
+
 
 
 

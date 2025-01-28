@@ -17,7 +17,7 @@ create table usuarios (
 
 select * from usuarios;
 
-create table practicas_preprofesionales (
+create table  practicas_preprofesionales(
     id_practica int auto_increment primary key,
     nombre_estudiante varchar(45) not null, 
     cedula_estudiante varchar(10) not null,
@@ -47,6 +47,15 @@ create table visitas_tecnicas (
 
 select * from visitas_tecnicas;
 
+create table registro_practicas(
+    id_registro int auto_increment primary key,
+    nombre_docente varchar(45) not null,
+    nombre_empresa varchar(45) not null,
+	hora_inicio datetime not null,
+    ubicacion_inicio varchar(45) not null,
+    hora_final datetime not null,
+    ubicacion_final varchar(45) not null,
+);
 
 
 

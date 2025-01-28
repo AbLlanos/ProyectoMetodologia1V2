@@ -35,14 +35,15 @@
     </section>
 
     <!-- Formulario de inicio de sesión -->
-    <div class="flex min-h-screen w-full flex-wrap items-stretch bg-white dark:bg-gray-800 max-md:pb-20 max-md:pt-32">
-        <div class="grow md:flex md:w-1/2 md:flex-col md:items-center md:justify-center md:py-20">
+    <div class="flex min-h-screen w-full flex-wrap items-stretch bg-white dark:bg-gray-800 max-md:pb-10 max-md:pt-20">
+        <div class="grow md:flex md:w-1/2 md:flex-col md:items-center md:justify-center md:py-5">
             <div class="w-full px-4 text-center text-xs lg:w-1/2">
-                <h1 class="mb-8 text-xl font-bold text-gray-800 dark:text-white">Bienvenido de nuevo</h1>
-                <p class="mb-6 text-gray-600 dark:text-gray-400">Ingresa a tu cuenta</p>
+                <h1 class="mb-2 text-xl font-bold text-gray-800 dark:text-white">Bienvenido de nuevo</h1>
+                <div class="h-1 bg-teal-500 mx-auto  rounded-full w-32"></div>
+                <p class="mb-6 text-gray-600 dark:text-gray-400 pt-2">Ingresa a tu cuenta</p>
 
                 <!-- FORMULARIO -->
-                <form method="post" action="/loginUsuario" class="flex flex-col gap-6" novalidate>
+                <form method="post" action="/loginUsuario" class="flex flex-col gap-2" novalidate>
                     <input type="hidden" id="plan" name="plan" value="">
 
                     <!-- Campo Email -->
@@ -108,7 +109,7 @@
                 </form>
 
                 <!-- Enlace para registro -->
-                <div class="mt-20 text-gray-600 dark:text-gray-400">
+                <div class="mt-5 text-gray-600 dark:text-gray-400">
                     ¿Aún no tienes una cuenta? <a href="registroUsuario.html"
                         class="font-medium text-indigo-600 underline">Regístrate</a>
                 </div>
@@ -116,10 +117,10 @@
         </div>
 
         <!-- Imagen lateral -->
-        <div class="hidden md:flex md:w-1/2 bg-cover bg-center p-3"
+        <div class="hidden md:flex md:w-1/2 lg:w-1/2 bg-cover bg-center p-3"
             style="background-image: url('img/0004-fondoColor.jpg')">
             <img src="img/0003-logoLogin.webp" alt="Service Dashboard Mockup"
-                class="rounded-[36px] shadow-[0_24px_88px_rgba(0,0,0,0.55)]">
+                class="rounded-[36px] shadow-[0_24px_88px_rgba(0,0,0,0.40)]">
         </div>
     </div>
 

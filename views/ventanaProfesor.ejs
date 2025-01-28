@@ -39,7 +39,7 @@
     <!-- Tabla de profesor-->
     <section id=" container tablaEstudiante" class="bg-gray-100 p-6 rounded-lg shadow-lg">
         <h1 class="text-center text-2xl font-bold text-gray-800">ITSQMET</h1>
-        <h2 class="text-center text-xl font-semibold text-gray-700 mt-2">Docente</h2>
+        <h2 class="text-center text-xl font-semibold text-gray-700 mt-2">Unidades de vinculación</h2>
         <div class="h-1 bg-teal-500 mx-auto mt-3 rounded-full w-32"></div>
         <p class="text-center text-gray-600 mt-3">
             Tus credenciales y opciones de gestión se mostrarán a continuación:
@@ -65,6 +65,12 @@
                         <td class="px-6 py-3 font-semibold text-gray-700">ID</td>
                         <td class="px-6 py-3 text-gray-600">
                             <%= datos.idBase %>
+                        </td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="px-6 py-3 font-semibold text-gray-700">Periodo académico</td>
+                        <td class="px-6 py-3 text-gray-600">
+                            <%= datos.periodoAcademico %>
                         </td>
                     </tr>
                     <tr class="border-b">
@@ -104,10 +110,8 @@
 
 
 
-    <!-- Botón para cargar las prácticas -->
 
 
-    <!--tabla DE PRACTICAS-->
     <!-- Tabla de prácticas -->
     <section id="tablaPracticas" class="bg-gray-100 p-6 rounded-lg shadow-lg">
         <h1 class="text-center text-2xl font-bold text-gray-800">Prácticas Preprofesionales</h1>
@@ -129,14 +133,17 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">ID Práctica</th>
-                            <th scope="col" class="px-6 py-3">Nombre estudiante</th>
+                            <th scope="col" class="px-6 py-3">Nombre Estudiante</th>
                             <th scope="col" class="px-6 py-3">Cédula Estudiante</th>
-                            <th scope="col" class="px-6 py-3">Empresa</th>
-                            <th scope="col" class="px-6 py-3">Carrera</th>
-                            <th scope="col" class="px-6 py-3">Fecha inicio</th>
-                            <th scope="col" class="px-6 py-3">Fecha fin</th>
+                            <th scope="col" class="px-6 py-3">Entidad Beneficiaria</th>
+                            <th scope="col" class="px-6 py-3">Fecha Inicio</th>
+                            <th scope="col" class="px-6 py-3">Ubicación Inicio</th>
+                            <th scope="col" class="px-6 py-3">Fecha Fin</th>
+                            <th scope="col" class="px-6 py-3">Ubicación final</th>
+                            <th scope="col" class="px-6 py-3">Horas Totales</th>
                             <th scope="col" class="px-6 py-3">Calificación</th>
                             <th scope="col" class="px-6 py-3">Estado</th>
+                            <th scope="col" class="px-6 py-3"></th>
                             <th scope="col" class="px-6 py-3"></th>
                         </tr>
                     </thead>
@@ -147,13 +154,20 @@
             </div>
         </section>
 
+
         <script>
-            // Script para cargar las prácticas en la tabla
             document.getElementById("cargarPracticasBtn").addEventListener("click", function () {
                 const idDocente = "<%= datos.idBase %>"; // Obtener el ID del docente desde el backend
 
                 // Verifica que el ID del docente es correcto
                 console.log("Docente ID: ", idDocente);
+
+                // Función para formatear las fechas
+                function formatDate(dateString) {
+                    const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+                    const date = new Date(dateString);
+                    return date.toLocaleString('es-ES', options);  // Formato: DD/MM/YYYY HH:mm
+                }
 
                 // Realiza una solicitud para obtener las prácticas preprofesionales
                 fetch(`/practicasPreprofesionales/${idDocente}`)
@@ -171,39 +185,68 @@
                                 const row = document.createElement("tr");
 
                                 row.innerHTML = `
-                        <td class="px-6 py-3">${practica.id_practica}</td>
-                        <td class="px-6 py-3">${practica.nombre_estudiante}</td>
+                        <td class="px-6 py-3">${practica.id_registro}</td>
+                        <td class="px-6 py-3">${practica.usuario_estudiante}</td>
                         <td class="px-6 py-3">${practica.cedula_estudiante}</td>
-                        <td class="px-6 py-3">${practica.empresa}</td>
-                        <td class="px-6 py-3">${practica.materia}</td>
-                        <td class="px-6 py-3">${practica.fecha_inicio}</td>
-                        <td class="px-6 py-3">${practica.fecha_fin}</td>
+                        <td class="px-6 py-3">${practica.entidad_beneficiaria}</td>
+                        <td class="px-6 py-3">${formatDate(practica.hora_inicio)}</td>
+                        <td class="px-6 py-3">${practica.ubicacion_inicio}</td>
+                        <td class="px-6 py-3">${formatDate(practica.hora_final)}</td>
+                        <td class="px-6 py-3">${practica.ubicacion_final}</td>
+                        <td class="px-6 py-3">${practica.hora_total_visita}</td>
                         <td class="px-6 py-3">${practica.calificacion}</td>
                         <td class="px-6 py-3">${practica.estado}</td>
                         <td class="px-6 py-3">
-                            <form action="/eliminarPractica" method="POST">
-                                <input type="hidden" name="idPractica" value="${practica.id_practica}">
-                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                    Eliminar
-                                </button>
+                            <form action="/eliminarPractica" method="POST" style="display:inline;">
+                                <input type="hidden" name="idPractica" value="${practica.id_registro}">
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</button>
                             </form>
                         </td>
                         <td class="px-6 py-3">
-                            <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded editarBtn" data-id="${practica.id_practica}">
-                                Editar
-                            </button>
+                            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2 editar-btn" data-id="${practica.id_registro}">Editar</button>
                         </td>
                     `;
-
                                 tbody.appendChild(row);
                             });
 
-                            // Agregar el evento para cada botón de editar
-                            const botonesEditar = document.querySelectorAll('.editarBtn');
-                            botonesEditar.forEach(boton => {
-                                boton.addEventListener('click', function () {
-                                    const idPractica = boton.getAttribute('data-id');
-                                    cargarDatosPractica(idPractica);
+                            // Agregar evento de edición
+                            document.querySelectorAll('.editar-btn').forEach(button => {
+                                button.addEventListener('click', function () {
+                                    const idRegistro = this.getAttribute('data-id');
+                                    // Solicitar datos del registro
+                                    fetch(`/getPractica/${idRegistro}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            function formatDateForInput(dateString) {
+                                                const date = new Date(dateString);
+                                                const year = date.getFullYear();
+                                                const month = String(date.getMonth() + 1).padStart(2, '0'); // Mes con 2 dígitos
+                                                const day = String(date.getDate()).padStart(2, '0'); // Día con 2 dígitos
+                                                const hours = String(date.getHours()).padStart(2, '0'); // Hora con 2 dígitos
+                                                const minutes = String(date.getMinutes()).padStart(2, '0'); // Minutos con 2 dígitos
+                                                return `${year}-${month}-${day}T${hours}:${minutes}`;
+                                            }
+
+                                            // Cargar datos en el formulario
+                                            document.getElementById('idUnidadVinculacion').value = data.id_unidadvinculacion;
+                                            document.getElementById('nombreUnidadVinculacion').value = data.nombre_unidadvinculacion;
+                                            document.getElementById('usuarioEstudiante').value = data.usuario_estudiante;
+                                            document.getElementById('cedulaEstudiante').value = data.cedula_estudiante;
+                                            document.getElementById('entidadBeneficiaria').value = data.entidad_beneficiaria;
+
+                                            // Formatear y cargar las fechas
+                                            document.getElementById('horaInicio').value = formatDateForInput(data.hora_inicio);
+                                            document.getElementById('ubicacionInicio').value = data.ubicacion_inicio;
+                                            document.getElementById('horaFin').value = formatDateForInput(data.hora_final);
+                                            document.getElementById('ubicacionFinal').value = data.ubicacion_final;
+                                            document.getElementById('calificacion').value = data.calificacion;
+                                            document.getElementById('estado').value = data.estado;
+
+                                            // Cambiar el texto del botón para "Actualizar"
+                                            document.getElementById('actualizarBtn').innerText = 'Actualizar práctica';
+                                            document.getElementById('visitaForm').action = `/actualizarPractica/${idRegistro}`;
+                                        })
+                                        .catch(error => console.error("Error al cargar la práctica:", error));
                                 });
                             });
                         }
@@ -215,330 +258,126 @@
             });
 
         </script>
+    </section>
 
 
 
 
-        <!--FORMULARIO PARA CREAR PRACTICA PREPROFESIONALES-->
-        <section class="container mx-auto py-2 px-4 p-5" id="crearcuenta">
-            <div class="flex flex-col items-center justify-center">
-                <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-4xl">
-                    <div class="flex justify-center mb-6">
-                        <img width="120px" height="120px" src="img/0001-logoNavbar.webp" alt="Logo de la Empresa">
-                    </div>
-                    <h1 class="text-center text-white text-2xl mb-4">Generar la práctica pre-profesional</h1>
-                    <hr>
-                    <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
-
-                    <form id="visitaForm" action="/crearPracticaPreprofesional" method="post" id="modificarForm"
-                        action="" method="POST">
-                        <div class="grid grid-cols-2 gap-4">
-
-                            <!-- Campo Docente -->
-                            <div>
-                                <label for="id_docente" class="block text-white mb-2">Docente</label>
-                                <input type="text" name="idDocente" id="idDocente"
-                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Nombre del docente" required readonly value="<%= datos.idBase %>">
-                                <input type="text" name="nombreDocente" id="nombreDocente"
-                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Nombre del docente" required readonly
-                                    value="<%= datos.nombreBase %> <%= datos.apellidoBase %> ">
-                            </div>
-
-                            <!-- Campo Estudiante (Cédula y Nombre) -->
-                            <div>
-                                <label for="id_estudiante" class="block text-white mb-2">Estudiante</label>
-                                <input type="text" name="idEstudiante" id="idEstudiante"
-                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Nombre del estudiante" required>
-                                <input type="text" name="cedulaEstudiante" id="cedulaEstudiante"
-                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Cédula del estudiante" required maxlength="10">
-                            </div>
-
-                        </div>
-
-                        <!-- Campo Empresa -->
-                        <div>
-                            <label for="nombreEmpresa" class="block text-white mb-2">Escribir el nombre de la
-                                empresa:</label>
-                            <input type="text" name="nombreEmpresa" id="nombreEmpresa"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                required placeholder="Empresa">
-                        </div>
-
-                        <!-- Campo Carrera -->
-                        <div>
-                            <label for="materia" class="block text-white mb-2">Carrera</label>
-                            <input type="text" name="materia" id="materia"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Carrera del estudiante" required>
-                        </div>
-
-                        <!-- Campo Fechas -->
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="fecha_inicio" class="block text-white mb-2">Fecha de inicio</label>
-                                <input type="date" name="fechaInicio" id="fechaInicio"
-                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required>
-                            </div>
-
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label for="fecha_fin" class="block text-white mb-2">Fecha de fin</label>
-                                <input type="date" name="fechaFin" id="fechaFin"
-                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required>
-                            </div>
-                        </div>
-
-
-                        <!-- Campo Calificación -->
-                        <div>
-                            <label for="calificacion" class="block text-white mb-2">Calificación</label>
-                            <input type="number" name="calificacion" id="calificacion" min="0" max="10" step="0.1"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Calificación de la práctica" required>
-                        </div>
-
-                        <!-- Campo Estado -->
-                        <div>
-                            <label for="estado" class="block text-white mb-2">Estado de la práctica</label>
-                            <select name="estado" id="estado"
-                                class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                required>
-                                <option value="en_progreso">En progreso</option>
-                                <option value="finalizada">Finalizada</option>
-                                <option value="cancelada">Cancelada</option>
-                            </select>
-                        </div>
-
-                        <!-- Botón de Enviar -->
-                        <!-- Solo el botón de actualización -->
-                        <button type="submit"
-                            class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            id="actualizarBtn">Generar o actualizar práctica</button>
-
-                    </form>
+    <!-- FORMULARIO PARA CREAR PRACTICAS PREPROFESIONALES -->
+    <section class="container mx-auto py-2 px-4 p-5" id="crearcuenta">
+        <div class="flex flex-col items-center justify-center">
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-4xl">
+                <div class="flex justify-center mb-6">
+                    <img width="120px" height="120px" src="img/0001-logoNavbar.webp" alt="Logo de la Empresa">
                 </div>
-            </div>
-        </section>
+                <h1 class="text-center text-white text-2xl mb-4">Generar la práctica pre-profesional</h1>
+                <hr>
+                <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
 
-        <script>
-            function cargarDatosPractica(idPractica) {
-                fetch(`/practica/${idPractica}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            alert("No se pudo cargar la práctica.");
-                            return;
-                        }
-                        // Cargar los datos de la práctica en el formulario
-                        document.getElementById('idEstudiante').value = data.nombre_estudiante;
-                        document.getElementById('cedulaEstudiante').value = data.cedula_estudiante;
-                        document.getElementById('nombreEmpresa').value = data.empresa;
-                        document.getElementById('materia').value = data.materia;
-                        document.getElementById('fechaInicio').value = data.fecha_inicio;
-                        document.getElementById('fechaFin').value = data.fecha_fin;
-                        document.getElementById('calificacion').value = data.calificacion;
-                        document.getElementById('estado').value = data.estado;
-
-                        // Cambiar la acción del formulario para la actualización de la práctica
-                        const form = document.getElementById('visitaForm');
-                        form.setAttribute('action', `/actualizarPracticaPreprofesional/${idPractica}`); // Actualiza la acción
-
-                        // Cambiar el texto del botón para "Actualizar"
-                        document.getElementById('actualizarBtn').textContent = 'Actualizar Práctica';
-                    })
-                    .catch(error => {
-                        console.error("Error al cargar los datos de la práctica:", error);
-                        alert("Hubo un error al cargar los datos de la práctica.");
-                    });
-            }
-
-
-        </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- Tabla de Visitas Técnicas -->
-        <section id="tablaVisitas" class="bg-gray-100 p-6 rounded-lg shadow-lg p-5">
-            <h1 class="pt-3 text-center text-2xl font-bold text-gray-800">Visitas Técnicas del Docente</h1>
-            <div class="h-1 bg-teal-500 mx-auto mt-3 rounded-full w-32"></div>
-            <p class="text-center text-gray-600 mt-3">
-                A continuación podras observar tus visitas técnicas planificadas:
-            </p>
-            <div class="h-1 bg-aqua mx-auto mt-3 rounded-full w-32"></div>
-            <!--BOTON PARA CARGAR-->
-            <div class="text-center mt-6">
-                <button id="cargarVisitasBtn"
-                    class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-500 focus:outline-none">
-                    Cargar Prácticas
-                </button>
-            </div>
-
-
-            <div class="overflow-x-auto mt-6 text-center">
-                <table class="min-w-full text-sm text-left text-gray-500 border border-gray-300 rounded-lg">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">ID Visita</th>
-                            <th scope="col" class="px-6 py-3">Empresa</th>
-                            <th scope="col" class="px-6 py-3">Descripción</th>
-                            <th scope="col" class="px-6 py-3">Fecha de Visita</th>
-                            <th scope="col" class="px-6 py-3">Observaciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-visitas" class="bg-white divide-y divide-gray-200">
-                        <!-- Aquí se llenan dinámicamente los datos -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <script>
-
-
-            // Cambié el ID a 'cargarVisitasBtn' para que coincida con el HTML
-            document.getElementById("cargarVisitasBtn").addEventListener("click", function () {
-                const nombreDocente = "<%= datos.nombreBase %>";  // Obtener el nombre del docente desde el backend
-
-                // Verifica si el nombreDocente es correcto
-                console.log("Docente: ", nombreDocente);
-
-                fetch(`/visitas/${nombreDocente}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const tbody = document.getElementById("tbody-visitas");
-                        tbody.innerHTML = '';  // Limpiar las filas actuales
-
-                        // Si no hay datos, muestra un mensaje
-                        if (data.length === 0) {
-                            tbody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500">No se encontraron visitas.</td></tr>';
-                        } else {
-                            data.forEach(visita => {
-                                const row = document.createElement("tr");
-
-                                row.innerHTML = `
-                                <td class="px-6 py-3">${visita.id_visita}</td>
-                                <td class="px-6 py-3">${visita.nombre_empresa}</td>
-                                <td class="px-6 py-3">${visita.descripcion}</td>
-                                <td class="px-6 py-3">${visita.fecha_visita}</td>
-                                <td class="px-6 py-3">${visita.observaciones}</td>
-                            `;
-
-                                tbody.appendChild(row);
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error al cargar las visitas:", error);
-                        alert("Hubo un error al cargar las visitas.");
-                    });
-            });
-        </script>
-
-
-
-
-
-        <!--Seccion crear visitar-->
-        <section class="container mx-auto py-2 px-4 " id="crearcuenta p-5">
-            <div class="flex flex-col items-center justify-center">
-                <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-4xl">
-                    <div class="flex justify-center mb-6">
-                        <img width="120px" height="120px" src="img/0001-logoNavbar.webp" alt="Logo de la Empresa">
+                <form id="visitaForm" action="/crearRegistroPractica" method="post">
+                    <!-- Campo Unidad ID -->
+                    <div class="flex flex-col">
+                        <label for="idUnidadVinculacion" class="block text-white mb-2">ID de la unidad de
+                            vinculación</label>
+                        <input type="text" name="idUnidadVinculacion" id="idUnidadVinculacion"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300"
+                            placeholder="ID de la unidad de vinculación" required readonly value="<%= datos.idBase %>">
                     </div>
-                    <h1 class="text-center text-white text-2xl mb-4">Generar la visita técnica</h1>
-                    <hr>
-                    <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
 
-                    <form id="visitaForm" action="/crearVisitaTecnica" method="post">
-                        <div class="grid grid-cols-2 gap-4">
+                    <!-- Campo Unidad nombre -->
+                    <div class="flex flex-col">
+                        <label for="nombreUnidadVinculacion" class="block text-white mb-2">Nombre de la unidad de
+                            vinculación</label>
+                        <input type="text" name="nombreUnidadVinculacion" id="nombreUnidadVinculacion"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300" placeholder="Nombre del docente"
+                            required readonly value="<%= datos.nombreBase %> <%= datos.apellidoBase %>">
+                    </div>
 
-                            <!-- Campo Docente -->
-                            <div>
-                                <label for="nombre_docente" class="block text-white mb-2">Su nombre</label>
-                                <input type="text" name="nombreDocente" id="nombreDocente"
-                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Nombre del docente" required readonly value="<%= datos.nombreBase %>">
-                            </div>
+                    <!-- Campo Estudiante Usuario-->
+                    <div class="flex flex-col">
+                        <label for="usuarioEstudiante" class="block text-white mb-2">Ingresar el usuario del
+                            estudiante</label>
+                        <input type="text" name="usuarioEstudiante" id="usuarioEstudiante"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300"
+                            placeholder="Usuario del estudiante" required>
+                    </div>
 
-                            <!-- Campo Empresa -->
-                            <div>
-                                <label for="nombre_docente" class="block text-white mb-2">Su nombre</label>
-                                <input type="text" name="nombreEmpresa" id="nombreEmpresa"
-                                    class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Empresa">
+                    <!-- Campo cedula estudiante -->
+                    <div class="flex flex-col">
+                        <label for="cedulaEstudiante" class="block text-white mb-2">Ingresar la cédula del
+                            estudiante</label>
+                        <input type="text" name="cedulaEstudiante" id="cedulaEstudiante"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300"
+                            placeholder="Cédula del estudiante" required maxlength="10">
+                    </div>
 
-                            </div>
-                        </div>
+                    <!-- Otros campos de información -->
+                    <div class="flex flex-col">
+                        <label for="entidadBeneficiaria" class="block text-white mb-2">Escribir el nombre de la entidad
+                            beneficiaria</label>
+                        <input type="text" name="entidadBeneficiaria" id="entidadBeneficiaria"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300" required
+                            placeholder="Entidad beneficiaria">
+                    </div>
 
-                        <!-- Campo Descripción -->
-                        <label for="descripcion" class="block text-white mb-2">Descripción de la visita:</label>
-                        <textarea name="descripcion" id="descripcion" rows="2"
-                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Detalles de la visita" required></textarea>
+                    <div class="flex flex-col">
+                        <label for="horaInicio" class="block text-white mb-2">Fecha y hora de inicio</label>
+                        <input type="datetime-local" name="horaInicio" id="horaInicio"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300" required>
+                    </div>
 
-                        <!-- Campo Fecha de Visita -->
-                        <label for="fecha_visita" class="block text-white mb-2">Fecha de la visita:</label>
-                        <input type="date" name="fechaVisita" id="fechaVisita"
-                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    <div class="flex flex-col">
+                        <label for="ubicacionInicio" class="block text-white mb-2">Ubicación de inicio</label>
+                        <input type="text" name="ubicacionInicio" id="ubicacionInicio"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300" required
+                            placeholder="Ubicación de inicio">
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="horaFin" class="block text-white mb-2">Fecha y hora de fin</label>
+                        <input type="datetime-local" name="horaFin" id="horaFin"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300" required>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="ubicacionFinal" class="block text-white mb-2">Ubicación final</label>
+                        <input type="text" name="ubicacionFinal" id="ubicacionFinal"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300" required
+                            placeholder="Ubicación final">
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="calificacion" class="block text-white mb-2">Calificación</label>
+                        <input type="number" name="calificacion" id="calificacion" min="0" max="10" step="0.1"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300"
+                            placeholder="Calificación de la práctica" required>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <label for="estado" class="block text-white mb-2">Estado de la práctica</label>
+                        <select name="estado" id="estado" class="w-full p-3 mb-4 rounded-md border border-gray-300"
                             required>
+                            <option value="En progreso">En progreso</option>
+                            <option value="Finalizada">Finalizada</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
 
-                        <!-- Campo Observaciones -->
-                        <label for="observaciones" class="block text-white mb-2">Observaciones:</label>
-                        <textarea name="observaciones" id="observaciones" rows="2"
-                            class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Observaciones adicionales (opcional)"></textarea>
+                    <!-- Campo para capturar o subir una foto -->
+                    <div class="flex flex-col">
+                        <label for="fotoPractica" class="block text-white mb-2">Foto de la práctica</label>
+                        <input type="file" name="fotoPractica" id="fotoPractica"
+                            class="w-full p-3 mb-4 rounded-md border border-gray-300 bg-white" required>
+                    </div>
 
-                        <!-- Botón de Enviar -->
-                        <button type="submit"
-                            class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Registrar
-                            Visita</button>
-                    </form>
-
-
-                    <!-- Script para mostrar y ocultar el formulario -->
-                    <script>
-                        document.getElementById("toggleFormButton").addEventListener("click", function () {
-                            var formContainer = document.getElementById("visitaFormContainer");
-                            formContainer.classList.toggle("hidden");
-                        });
-                    </script>
-
-                    <!-- Estilos adicionales -->
-                    <style>
-                        /* Estilo para las columnas del formulario */
-                        .grid {
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            gap: 16px;
-                        }
-
-                        /* Asegurarse de que los inputs y select estén alineados */
-                        .grid input,
-                        .grid select {
-                            width: 100%;
-                        }
-                    </style>
-
-
+                    <!-- Botón de Enviar -->
+                    <button type="submit"
+                        class="w-full py-3 mt-4 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600"
+                        id="actualizarBtn">Generar o actualizar práctica</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
 
 

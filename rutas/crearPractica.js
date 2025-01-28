@@ -1,71 +1,33 @@
+import multer from "multer";
 import { Router } from "express";
 import conexion from "../config/conexion.js";
 
 const router = Router();
 
-router.post("/crearPracticaPreprofesional", (req, res) => {
-    const { idDocente, nombreDocente, nombreEmpresa, materia, fechaInicio, fechaFin, calificacion, estado } = req.body;
+const storage = multer.memoryStorage(); // Almacena el archivo en memoria como buffer
+const upload = multer({ storage }); // Inicializa multer
 
-// Limpiar la cédula (por si hay espacios adicionales)
-const cedulaEstudiante = req.body.cedulaEstudiante.trim();
+router.post("/crearRegistroPractica", upload.single("fotoPractica"), (req, res) => {
+    const { cedulaEstudiante, usuarioEstudiante, idUnidadVinculacion, nombreUnidadVinculacion, entidadBeneficiaria, horaInicio, ubicacionInicio, horaFin, ubicacionFinal, calificacion, estado } = req.body;
+    const fotoPractica = req.file?.buffer;
 
-console.log("Cédula del estudiante:", cedulaEstudiante);
-
-const verificarEstudiante = `SELECT id_usuario, nombre, apellido FROM usuarios WHERE cedula = ? AND rol = 'estudiante'`;
-
-conexion.query(verificarEstudiante, [cedulaEstudiante], (error, result) => {
-    if (error) {
-        console.error("Error al verificar el estudiante:", error);
-        res.redirect("errorGeneral.html");
-        return;
+    if (!fotoPractica) {
+        console.error("No se proporcionó la foto");
+        return res.redirect("/errorGeneral.html");
     }
 
-    if (result.length === 0) {
-        console.log("Estudiante no encontrado con cédula:", cedulaEstudiante);
-        res.redirect("errorGeneral.html");
-        return;
-    }
-
-    const idEstudiante = result[0].id_usuario;
-
-    // Inserción de la práctica preprofesional
     const insertarPractica = `
-        INSERT INTO practicas_preprofesionales (
-            nombre_estudiante, 
-            cedula_estudiante, 
-            id_docente, 
-            nombre_docente,
-            empresa, 
-            materia, 
-            fecha_inicio, 
-            fecha_fin, 
-            calificacion, 
-            estado
-        ) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO registro_practicas (hora_inicio, ubicacion_inicio, hora_final, ubicacion_final, entidad_beneficiaria, cedula_estudiante, usuario_estudiante, id_unidadvinculacion, nombre_unidadvinculacion, calificacion, estado, foto_practica)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    conexion.query(insertarPractica, [
-        idEstudiante,
-        cedulaEstudiante,
-        idDocente,
-        nombreDocente,
-        nombreEmpresa,
-        materia,
-        fechaInicio,
-        fechaFin,
-        calificacion,
-        estado
-    ], (error, result) => {
+    conexion.query(insertarPractica, [horaInicio, ubicacionInicio, horaFin, ubicacionFinal, entidadBeneficiaria, cedulaEstudiante, usuarioEstudiante, idUnidadVinculacion, nombreUnidadVinculacion, calificacion, estado, fotoPractica], (error) => {
         if (error) {
-            console.error("Error al registrar la práctica preprofesional:", error);
-            res.redirect("/errorGeneral.html");
-            return;
+            console.error("Error al registrar la práctica:", error);
+            return res.redirect("/errorGeneral.html");
         }
         res.redirect("/tareaRealizada.html");
     });
-});
-
 });
 
 export default router;

@@ -5,19 +5,17 @@ const router = Router();
 
 // Ruta para eliminar una práctica preprofesional
 router.post("/eliminarPractica", (req, res) => {
-    const idPractica = req.body.idPractica;
+    const idPractica = req.body.idPractica;  // Cambié 'idRegistro' por 'idPractica'
 
-    const query = "DELETE FROM practicas_preprofesionales WHERE id_practica = ?";
+    const query = "DELETE FROM registro_practicas WHERE id_registro = ?";
 
-    // Ejecutar la consulta de eliminación
     conexion.query(query, [idPractica], (error, results) => {
         if (error) {
             console.error("Error al eliminar la práctica:", error);
             res.redirect("/errorGeneral.html");
             return;
         }
-        // Redirige después de eliminar o muestra un mensaje de éxito
-        res.redirect("/tareaRealizada.html"); // Suponiendo que esta es la ruta donde quieres volver
+        res.redirect("/tareaRealizada.html");
     });
 });
 

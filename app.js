@@ -12,7 +12,7 @@ import crearVisitas from "./rutas/crearVisitaTecnica.js";
 
 import crearPracticaPreprofesion from "./rutas/crearPractica.js";
 
-import admirarPractica from "./rutas/admirarPracticaPre.js";
+import admirarPractica from "./rutas/admirarPracticaEstudiante.js";
 
 import admirarVisitaProfesor from "./rutas/admirarVisitaDocente.js";
 

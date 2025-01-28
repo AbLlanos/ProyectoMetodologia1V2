@@ -1,31 +1,19 @@
 import { Router } from "express";
-import conexion from "../config/conexion.js";
-
-import link from "../config/link.js";
+import conexion from "../config/conexion.js"; // Asegúrate de que la conexión a la base de datos está bien configurada
 
 const router = Router();
 
-// Ruta para obtener los datos del usuario a modificar
-// Ruta para obtener los datos de una práctica específica
-router.get("/practica/:id", (req, res) => {
-    const idPractica = req.params.id;
+// Ruta para obtener los detalles de una práctica específica por id_registro
+router.get("/getPractica/:id", (req, res) => {
+    const idRegistro = req.params.id;
+    const query = `SELECT * FROM registro_practicas WHERE id_registro = ?`;
 
-    const query = "SELECT * FROM practicas_preprofesionales WHERE id_practica = ?";
-
-    conexion.query(query, [idPractica], (error, results) => {
-        if (error) {
-            console.error("Error al obtener los datos de la práctica:", error);
-            res.status(500).json({ error: "Error al obtener los datos de la práctica." });
-            return;
+    conexion.query(query, [idRegistro], (error, result) => {
+        if (error || result.length === 0) {
+            return res.status(404).json({ error: "Práctica no encontrada" });
         }
-
-        if (results.length > 0) {
-            res.json(results[0]);
-        } else {
-            res.status(404).json({ error: "Práctica no encontrada" });
-        }
+        res.json(result[0]);
     });
 });
-
 
 export default router;

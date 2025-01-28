@@ -12,7 +12,8 @@
     <title>Registrarse</title>
 </head>
 
-<body style="background-image: url('/img/0005-fondoRegistro.jpg'); background-size: cover; background-position: center;">
+<body
+    style="background-image: url('/img/0005-fondoRegistro.jpg'); background-size: cover; background-position: center;">
 
     <!--Barra de navegacion-->
     <!-- Section 1 -->
@@ -41,7 +42,7 @@
     </section>
 
     <!--Formulario para crear cuenta-->
-    <section class="container mx-auto py-2 px-4 text-1xl " id="crearcuenta">
+    <section class="container mx-auto py-2 px-4 text-1xl" id="crearcuenta">
         <div class="flex flex-col items-center justify-center">
             <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-4xl">
                 <div class="flex justify-center mb-6">
@@ -66,19 +67,28 @@
                         placeholder="Apellido" required>
                     <p id="apellidoError" class="text-red-500 text-sm hidden">El apellido es obligatorio.</p>
 
+                    <!-- Campo Usuario -->
+                    <label for="apellido" class="block text-white mb-2">Ingrese su usuario:</label>
+                    <input type="text" name="usuario" id="usuario"
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Usuario" required>
+                    <p id="apellidoError" class="text-red-500 text-sm hidden">El apellido es obligatorio.</p>
+
                     <!-- Campo Cédula -->
                     <label for="cedula" class="block text-white mb-2">Ingrese su cédula:</label>
                     <input type="text" name="cedula" id="cedula"
                         class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Cédula" required maxlength="10">
-                    <p id="cedulaError" class="text-red-500 text-sm hidden">La cédula es obligatoria.</p>
+                    <p id="cedulaError" class="text-red-500 text-sm hidden">La cédula es obligatoria y debe tener 10
+                        dígitos.</p>
 
                     <!-- Campo Teléfono -->
                     <label for="telefono" class="block text-white mb-2">Ingrese su número de contacto:</label>
                     <input type="text" name="telefono" id="telefono"
                         class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Teléfono" maxlength="10" required>
-                    <p id="telefonoError" class="text-red-500 text-sm hidden">El teléfono es obligatorio.</p>
+                    <p id="telefonoError" class="text-red-500 text-sm hidden">El teléfono es obligatorio y debe tener 10
+                        dígitos.</p>
 
                     <!-- Campo Correo -->
                     <label for="email" class="block text-white mb-2">Ingrese su correo electrónico:</label>
@@ -89,10 +99,11 @@
 
                     <!-- Campo Contraseña -->
                     <label for="contrasena" class="block text-white mb-2">Ingrese una contraseña para la cuenta:</label>
-                    <input type="password" name="contrasena"  id="contrasena" 
+                    <input type="password" name="contrasena" id="contrasena"
                         class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                       placeholder="Contraseña" required>
-                    <p id="passwordError" class="text-red-500 text-sm hidden">La contraseña es obligatoria.</p>
+                        placeholder="Contraseña" required>
+                    <p id="passwordError" class="text-red-500 text-sm hidden">La contraseña debe tener al menos 8
+                        caracteres y debe contener al menos una letra mayúscula, una minúscula y un número.</p>
 
                     <!-- Campo Verificar Contraseña -->
                     <label for="confirmarContrasena" class="block text-white mb-2">Verifique la contraseña:</label>
@@ -101,12 +112,22 @@
                         placeholder="Verificar contraseña" required>
                     <p id="confirmPasswordError" class="text-red-500 text-sm hidden">Las contraseñas no coinciden.</p>
 
+                    <!-- Campo Periodo Académico -->
+                    <label for="periodoAcademico" class="block text-white mb-2">Ingrese su período académico:</label>
+                    <select name="periodoAcademico" id="periodoAcademico"
+                        class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="octubre 2024 - marzo 2025">octubre 2024 - marzo 2025</option>
+                        <option value="abril 2025 - septiembre 2025">abril 2025 - septiembre 2025</option>
+                        <option value="octubre 2025 - marzo 2026">octubre 2025 - marzo 2026</option>
+                    </select>
+
                     <!-- Campo Rol -->
-                    <label for="rol" class="block text-white mb-2">Seleccione si es maestro o estudiante:</label>
+                    <label for="rol" class="block text-white mb-2">Seleccione su rol:</label>
                     <select name="rol" id="rol"
                         class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="estudiante">Estudiante</option>
-                        <option value="docente">Docente</option>
+                        <option value="vinculacion practicas">Vinculación Prácticas</option>
+                        <option value="administrador">Administrador</option>
                     </select>
 
                     <!-- Botón de Enviar -->
@@ -117,74 +138,37 @@
         </div>
     </section>
 
-    <script>
-        document.getElementById('registrationForm').addEventListener('submit', function (event) {
-            event.preventDefault();
 
-            // Limpiar los errores anteriores
-            document.querySelectorAll('.text-red-500').forEach(function (element) {
-                element.classList.add('hidden');
-            });
 
-            let isValid = true;
 
-            // Validar nombre
-            const nombre = document.getElementById('nombre').value;
-            if (!nombre) {
-                document.getElementById('nombreError').classList.remove('hidden');
-                isValid = false;
-            }
 
-            // Validar apellido
-            const apellido = document.getElementById('apellido').value;
-            if (!apellido) {
-                document.getElementById('apellidoError').classList.remove('hidden');
-                isValid = false;
-            }
+    <footer class="flex flex-col space-y-2 justify-center  bg-black text-white pt-2 pb-2">
+        <nav class="flex justify-center flex-wrap gap-6 font-medium">
+            <a class="hover:text-gray-300" href="index.html">Inicio</a>
+            <a class="hover:text-gray-300" href="#">Acerca de nosotros</a>
+            <a class="hover:text-gray-300" href="#">Servicios</a>
+            <a class="hover:text-gray-300" href="#">Contacto</a>
+        </nav>
 
-            // Validar cédula
-            const cedula = document.getElementById('cedula').value;
-            if (!cedula) {
-                document.getElementById('cedulaError').classList.remove('hidden');
-                isValid = false;
-            }
-
-            // Validar teléfono
-            const telefono = document.getElementById('telefono').value;
-            if (!telefono) {
-                document.getElementById('telefonoError').classList.remove('hidden');
-                isValid = false;
-            }
-
-            // Validar correo
-            const email = document.getElementById('email').value;
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (!email || !emailPattern.test(email)) {
-                document.getElementById('emailError').classList.remove('hidden');
-                isValid = false;
-            }
-
-            // Validar contraseña
-            const contrasena = document.getElementById('contrasena').value;
-            if (!contrasena) {
-                document.getElementById('passwordError').classList.remove('hidden');
-                isValid = false;
-            }
-
-            // Validar verificar contraseña
-            const confirmarContrasena = document.getElementById('confirmarContrasena').value;
-            if (contrasena !== confirmarContrasena) {
-                document.getElementById('confirmPasswordError').classList.remove('hidden');
-                isValid = false;
-            }
-
-            // Si todo es válido, se puede enviar el formulario
-            if (isValid) {
-                this.submit();
-            }
-        });
-    </script>
-
+        <div class="flex justify-center space-x-5">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/facebook-new.png" />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/linkedin-2.png" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/instagram-new.png" />
+            </a>
+            <a href="https://messenger.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/facebook-messenger--v2.png" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/twitter.png" />
+            </a>
+        </div>
+        <p class="text-center font-medium text-gray-300">&copy; 2024 Itsqmet Ltd. Todos los derechos reservados.</p>
+    </footer>
 
 
 

@@ -1,39 +1,30 @@
-// rutas/practicas.js
 import { Router } from "express";
-import conexion from "../config/conexion.js"; // Asegúrate de que la conexión a la base de datos está bien configurada
+import conexion from "../config/conexion.js";
 
 const router = Router();
 
-// Ruta para obtener las prácticas preprofesionales por el id del docente
-router.get("/practicasPreprofesionales/:id_docente", (req, res) => {
-    const idDocente = req.params.id_docente; // Obtener el id del docente de la URL
+// Ruta para obtener las prácticas de una unidad de vinculación
+router.get("/practicasPreprofesionales/:idUnidad", (req, res) => {
+    const idUnidad = req.params.idUnidad; // ID de la unidad de vinculación
 
-    // Consulta SQL para obtener las prácticas preprofesionales
+    // Consulta para obtener las prácticas relacionadas con una unidad de vinculación
     const query = `
-        SELECT 
-            id_practica,
-            nombre_estudiante,
-            cedula_estudiante,
-            empresa,
-            materia,
-            fecha_inicio,
-            fecha_fin,
-            calificacion,
-            estado
-        FROM practicas_preprofesionales
-        WHERE id_docente = ?; -- Filtra por el id del docente
+        SELECT * 
+        FROM registro_practicas
+        WHERE id_unidadvinculacion = ?;
     `;
 
-    // Ejecutar la consulta
-    conexion.query(query, [idDocente], (error, results) => {
+    conexion.query(query, [idUnidad], (error, results) => {
         if (error) {
             console.error("Error al obtener las prácticas:", error);
-            res.redirect("/errorGeneral.html");
-            return;
+            return res.status(500).json({ error: "Error al obtener las prácticas." });
         }
 
-        // Responder con los datos obtenidos
-        res.json(results);
+        if (results.length > 0) {
+            res.json(results); // Devolver todos los registros de prácticas de esa unidad de vinculación
+        } else {
+            res.status(404).json({ error: "No se encontraron prácticas preprofesionales." });
+        }
     });
 });
 
