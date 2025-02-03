@@ -66,13 +66,13 @@
                         class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Apellido" required>
                     <p id="apellidoError" class="text-red-500 text-sm hidden">El apellido es obligatorio.</p>
-
                     <!-- Campo Usuario -->
-                    <label for="apellido" class="block text-white mb-2">Ingrese su usuario:</label>
+                    <label for="usuario" class="block text-white mb-2">Ingrese su usuario:</label>
                     <input type="text" name="usuario" id="usuario"
                         class="w-full p-3 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Usuario" required>
-                    <p id="apellidoError" class="text-red-500 text-sm hidden">El apellido es obligatorio.</p>
+                    <p id="usuarioError" class="text-red-500 text-sm hidden">El usuario es obligatorio.</p>
+
 
                     <!-- Campo Cédula -->
                     <label for="cedula" class="block text-white mb-2">Ingrese su cédula:</label>
@@ -137,6 +137,73 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function (event) {
+            let formValid = true;
+
+            // Validación del nombre
+            const nombre = document.getElementById("nombre");
+            if (!nombre.value.trim()) {
+                document.getElementById("nombreError").classList.remove("hidden");
+                formValid = false;
+            } else {
+                document.getElementById("nombreError").classList.add("hidden");
+            }
+
+            // Validación del apellido
+            const apellido = document.getElementById("apellido");
+            if (!apellido.value.trim()) {
+                document.getElementById("apellidoError").classList.remove("hidden");
+                formValid = false;
+            } else {
+                document.getElementById("apellidoError").classList.add("hidden");
+            }
+
+            // Validación del usuario
+            const usuario = document.getElementById("usuario");
+            if (!usuario.value.trim()) {
+                document.getElementById("usuarioError").classList.remove("hidden");
+                formValid = false;
+            } else {
+                document.getElementById("usuarioError").classList.add("hidden");
+            }
+
+            // Validación de la cédula
+            const cedula = document.getElementById("cedula");
+            if (!cedula.value.trim() || cedula.value.length !== 10) {
+                document.getElementById("cedulaError").classList.remove("hidden");
+                formValid = false;
+            } else {
+                document.getElementById("cedulaError").classList.add("hidden");
+            }
+
+            // Validación del teléfono
+            const telefono = document.getElementById("telefono");
+            if (!telefono.value.trim() || telefono.value.length !== 10) {
+                document.getElementById("telefonoError").classList.remove("hidden");
+                formValid = false;
+            } else {
+                document.getElementById("telefonoError").classList.add("hidden");
+            }
+
+            // Validación del correo electrónico
+            const email = document.getElementById("email");
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!email.value.trim() || !emailRegex.test(email.value)) {
+                document.getElementById("emailError").classList.remove("hidden");
+                formValid = false;
+            } else {
+                document.getElementById("emailError").classList.add("hidden");
+            }
+
+            // Si hay algún error, evitar el envío del formulario
+            if (!formValid) {
+                event.preventDefault();
+            }
+        });
+
+    </script>
 
 
 

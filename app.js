@@ -22,6 +22,15 @@ import modificarPractica from "./rutas/modificarPracticaProfesor.js"
 
 import recuperarDatosPractica from "./rutas/recuperarDatosPracticasProfesor.js"
 
+import Recuperarfoto from "./rutas/recuperarFotoProfesor.js"
+
+//Administrador
+
+import admirarUsuarioAdministrador from "./rutas/admirarUsuariosAdministrador.js"
+import eliminarUsuarioAdministrador from "./rutas/eliminarUsuarioAdministrador.js"
+import modificarUsuarioAdministrador from "./rutas/modificarUsuarioAdministrador.js"
+import recuperarUsuariosAministrador from "./rutas/recuperarDatosUsuariosAdministrador.js"
+
 
 const app = express();
 
@@ -52,6 +61,13 @@ app.use("/", admirarVisitaProfesor);
 app.use("/", admirarPracticaProfesor);
 app.use("/", modificarPractica);
 app.use("/", recuperarDatosPractica);
+app.use("/", Recuperarfoto);
+
+//Administador
+app.use("/",admirarUsuarioAdministrador);
+app.use("/",eliminarUsuarioAdministrador);
+app.use("/",modificarUsuarioAdministrador);
+app.use("/",recuperarUsuariosAministrador);
 
 
 

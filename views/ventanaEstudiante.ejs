@@ -144,19 +144,19 @@
             </table>
         </div>
     </section>
-    
+
 
     <!-- Script para cargar las prácticas -->
     <script>
         // Script para cargar las prácticas en la tabla
         document.getElementById("cargarPracticasBtn").addEventListener("click", function () {
-            const idDocente = "<%= datos.idBase %>"; // Obtener el ID del docente desde el backend
+            const usuarioEstudiante = "<%= datos.usuarioBase%>"; // Obtener el nombre de usuario desde el backend
 
-            // Verifica que el ID del docente es correcto
-            console.log("Docente ID: ", idDocente);
+            // Verifica que el nombre de usuario es correcto
+            console.log("Usuario Estudiante: ", usuarioEstudiante);
 
             // Realiza una solicitud para obtener las prácticas preprofesionales
-            fetch(`/practicas/${idDocente}`)
+            fetch(`/practicas/${usuarioEstudiante}`)
                 .then(response => response.json())
                 .then(data => {
                     const tbody = document.getElementById("tbody-carro");
@@ -183,17 +183,17 @@
                             const row = document.createElement("tr");
 
                             row.innerHTML = `
-                                <td class="px-6 py-3">${practica.id_registro}</td>
-                                <td class="px-6 py-3">${practica.nombre_unidadvinculacion}</td> <!-- Nombre de la unidad -->
-                                <td class="px-6 py-3">${practica.entidad_beneficiaria}</td>
-                                <td class="px-6 py-3">${practica.ubicacion_inicio}</td> <!-- Ubicación de inicio -->
-                                <td class="px-6 py-3">${practica.ubicacion_final}</td> <!-- Ubicación de final -->
-                                <td class="px-6 py-3">${formatFechaHora(practica.hora_inicio)}</td> <!-- Hora de inicio -->
-                                <td class="px-6 py-3">${formatFechaHora(practica.hora_final)}</td> <!-- Hora de finalización -->
-                                <td class="px-6 py-3">${practica.hora_total_visita}</td>
-                                <td class="px-6 py-3">${practica.calificacion}</td>
-                                <td class="px-6 py-3">${practica.estado}</td>
-                            `;
+                        <td class="px-6 py-3">${practica.id_registro}</td>
+                        <td class="px-6 py-3">${practica.nombre_unidadvinculacion}</td>
+                        <td class="px-6 py-3">${practica.entidad_beneficiaria}</td>
+                        <td class="px-6 py-3">${practica.ubicacion_inicio}</td>
+                        <td class="px-6 py-3">${practica.ubicacion_final}</td>
+                        <td class="px-6 py-3">${formatFechaHora(practica.hora_inicio)}</td>
+                        <td class="px-6 py-3">${formatFechaHora(practica.hora_final)}</td>
+                        <td class="px-6 py-3">${practica.hora_total_visita}</td>
+                        <td class="px-6 py-3">${practica.calificacion}</td>
+                        <td class="px-6 py-3">${practica.estado}</td>
+                    `;
 
                             tbody.appendChild(row);
                         });
@@ -204,7 +204,39 @@
                     alert("Hubo un error al cargar las prácticas preprofesionales.");
                 });
         });
+
     </script>
+
+
+    <footer class="flex flex-col space-y-2 justify-center  bg-black text-white pt-2 pb-2">
+        <nav class="flex justify-center flex-wrap gap-6 font-medium">
+            <a class="hover:text-gray-300" href="index.html">Inicio</a>
+            <a class="hover:text-gray-300" href="#">Acerca de nosotros</a>
+            <a class="hover:text-gray-300" href="#">Servicios</a>
+            <a class="hover:text-gray-300" href="#">Contacto</a>
+        </nav>
+
+        <div class="flex justify-center space-x-5">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/facebook-new.png" />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/linkedin-2.png" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/instagram-new.png" />
+            </a>
+            <a href="https://messenger.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/facebook-messenger--v2.png" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.icons8.com/fluent/30/ffffff/twitter.png" />
+            </a>
+        </div>
+        <p class="text-center font-medium text-gray-300">&copy; 2024 Itsqmet Ltd. Todos los derechos reservados.</p>
+    </footer>
+
+
 
 
 

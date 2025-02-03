@@ -184,6 +184,9 @@
                             data.forEach(practica => {
                                 const row = document.createElement("tr");
 
+                                // Mostrar la foto si está disponible
+                                const fotoPractica = practica.foto_practica ? `<img src="data:image/jpeg;base64,${practica.foto_practica}" alt="Foto de la práctica" class="h-20 w-20 object-cover">` : 'No disponible';
+
                                 row.innerHTML = `
                         <td class="px-6 py-3">${practica.id_registro}</td>
                         <td class="px-6 py-3">${practica.usuario_estudiante}</td>
@@ -196,6 +199,7 @@
                         <td class="px-6 py-3">${practica.hora_total_visita}</td>
                         <td class="px-6 py-3">${practica.calificacion}</td>
                         <td class="px-6 py-3">${practica.estado}</td>
+                        
                         <td class="px-6 py-3">
                             <form action="/eliminarPractica" method="POST" style="display:inline;">
                                 <input type="hidden" name="idPractica" value="${practica.id_registro}">
@@ -274,7 +278,8 @@
                 <hr>
                 <h2 class="text-center text-white text-2xl mb-4 pt-3">Llene los siguientes espacios</h2>
 
-                <form id="visitaForm" action="/crearRegistroPractica" method="post">
+                <form id="visitaForm" action="/crearRegistroPractica" method="post" enctype="multipart/form-data">
+
                     <!-- Campo Unidad ID -->
                     <div class="flex flex-col">
                         <label for="idUnidadVinculacion" class="block text-white mb-2">ID de la unidad de
@@ -359,7 +364,7 @@
                             required>
                             <option value="En progreso">En progreso</option>
                             <option value="Finalizada">Finalizada</option>
-                            <option value="Cancelada">Cancelada</option>
+                            <option value="Cancelado">Cancelado</option>
                         </select>
                     </div>
 

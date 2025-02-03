@@ -32,7 +32,8 @@ CREATE TABLE registro_practicas (
     id_unidadvinculacion int not null,
     nombre_unidadvinculacion varchar(45) not null,
     calificacion decimal(3,1) not null,  -- Agregada la columna de calificación
-    estado enum('en_progreso', 'finalizada', 'cancelada') not null, -- Columna para estado
+    estado enum('En progreso', 'Finalizada', 'Cancelad') not null, -- Columna para estado
+    foto_practica blob,
     fecha_registro timestamp default current_timestamp,
     constraint primary key (id_registro)
 );

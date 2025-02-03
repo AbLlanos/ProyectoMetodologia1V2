@@ -5,17 +5,17 @@ const router = Router();
 
 // Ruta para eliminar usuario
 router.post('/eliminarUsuario', (req, res) => {
-    const { idUsuario } = req.body; // Recibimos el ID del usuario desde el formulario
+    const { idUsuario } = req.body; // Obtener el ID del usuario desde el formulario
     const query = "DELETE FROM usuarios WHERE id_usuario = ?";
-    conexion.query(query, [idUsuario], (error, results) => {
+
+    conexion.query(query, [idUsuario], (error) => {
         if (error) {
-            console.error("Error al eliminar la práctica:", error);
+            console.error("Error al eliminar el usuario:", error);
             res.redirect("/errorGeneral.html");
             return;
         }
-        res.redirect("/tareaRealizada.html");
+        res.redirect("/tareaRealizada.html"); // Redirige a la página deseada
     });
 });
-
 
 export default router;

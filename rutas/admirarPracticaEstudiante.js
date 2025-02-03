@@ -3,8 +3,8 @@ import conexion from "../config/conexion.js";
 
 const router = Router();
 
-router.get("/practicas/:id_estudiante", (req, res) => {
-    const idEstudiante = req.params.id_estudiante;
+router.get("/practicas/:usuario_estudiante", (req, res) => {
+    const usuarioEstudiante = req.params.usuario_estudiante;
 
     // Consulta SQL para obtener las prácticas del estudiante
     const query = `
@@ -25,7 +25,7 @@ router.get("/practicas/:id_estudiante", (req, res) => {
         WHERE rp.usuario_estudiante = ?;
     `;
 
-    conexion.query(query, [idEstudiante], (error, results) => {
+    conexion.query(query, [usuarioEstudiante], (error, results) => {
         if (error) {
             console.error("Error al obtener las prácticas:", error);
             res.status(500).json({ message: "Error en el servidor" });
@@ -34,6 +34,5 @@ router.get("/practicas/:id_estudiante", (req, res) => {
         res.json(results);  // Enviamos los resultados al frontend
     });
 });
-
 
 export default router;
